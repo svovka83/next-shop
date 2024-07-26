@@ -24,7 +24,7 @@ export default function Home() {
           <div className="flex-1">
             <div className="flex flex-col px-4">
               <ProductsGroupList
-                title="Zerg"
+                title="zerg"
                 items={[
                   {
                     id: 1,
@@ -56,7 +56,7 @@ export default function Home() {
                 className=""
               />
               <ProductsGroupList
-                title="Terran"
+                title="terran"
                 items={[
                   {
                     id: 1,
@@ -88,7 +88,7 @@ export default function Home() {
                 className=""
               />
               <ProductsGroupList
-                title="Protoss"
+                title="protoss"
                 items={[
                   {
                     id: 1,

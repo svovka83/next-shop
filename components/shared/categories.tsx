@@ -10,9 +10,9 @@ interface Props {
 }
 
 export const races = [
-  { id: 1, name: "zerg" },
-  { id: 2, name: "terran" },
-  { id: 3, name: "protoss" },
+  { id: 1, title: "zerg" },
+  { id: 2, title: "terran" },
+  { id: 3, title: "protoss" },
 ];
 
 export const Categories: React.FC<Props> = ({ className }) => {
@@ -22,17 +22,17 @@ export const Categories: React.FC<Props> = ({ className }) => {
     <div
       className={cn("inline-flex gap-1 bg-gray-50 p-1 rounded-2xl", className)}
     >
-      {races.map(({ id, name }, index) => (
+      {races.map(({ id, title }, index) => (
         <a
           className={cn(
             "flex items-center font-bold h-11 rounded-2xl px-5",
             categoryActiveId === id &&
-              "bg-white shadow-md shadow-gray-200 text-primary",
-            className
+              "bg-white shadow-md shadow-gray-200 text-primary"
           )}
           key={index}
+          href={`/#${title}`}
         >
-          <button>{name}</button>
+          <button>{title}</button>
         </a>
       ))}
     </div>
