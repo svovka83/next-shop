@@ -5,7 +5,7 @@ import { Container } from ".";
 
 import Image from "next/image";
 import { Button } from "../ui";
-import { ArrowRight, Euro, ShoppingCart, User } from "lucide-react";
+import { ArrowRight, ShoppingCart, User } from "lucide-react";
 
 interface Props {
   className?: string;
@@ -33,8 +33,7 @@ export const Header: React.FC<Props> = ({ className }) => {
           </Button>
           <div>
             <Button variant="default" className="group relative">
-              <b>0</b>
-              <Euro size="16px" />
+              <b>0 $</b>
               <span className="h-full w-[1px] bg-white/30 mx-3" />
               <div className="flex items-center gap-1 transition duration-300 group-hover:opacity-0">
                 <ShoppingCart

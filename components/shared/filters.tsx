@@ -35,10 +35,51 @@ export const Filters: React.FC<Props> = ({ className }) => {
         </div>
 
         <RangeSlider min={0} max={100} step={5} value={[0, 100]} />
-
-        {/* filter characteristic */}
-        <CheckboxFiltersGroup />
       </div>
+
+      {/* filter characteristic */}
+      <CheckboxFiltersGroup
+        title="Characteristics"
+        className="mt-5"
+        limit={3}
+        defaultItems={[
+          {
+            text: "health",
+            value: "1",
+          },
+          {
+            text: "attack",
+            value: "2",
+          },
+          {
+            text: "defends",
+            value: "3",
+          },
+        ]}
+        items={[
+          {
+            text: "health",
+            value: "1",
+          },
+          {
+            text: "attack",
+            value: "2",
+          },
+          {
+            text: "defends",
+            value: "3",
+          },
+          {
+            text: "mana",
+            value: "4",
+          },
+          {
+            text: "price",
+            value: "5",
+            
+          },
+        ]}
+      />
     </div>
   );
 };
