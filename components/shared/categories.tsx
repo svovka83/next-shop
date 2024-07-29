@@ -25,7 +25,7 @@ export const Categories: React.FC<Props> = ({ className }) => {
       {races.map(({ id, name }, index) => (
         <a
           className={cn(
-            "flex items-center font-bold h-11 rounded-2xl px-5",
+            "flex items-center font-bold h-9 rounded-2xl px-5",
             categoryActiveId === id &&
               "bg-white shadow-md shadow-gray-200 text-primary"
           )}
