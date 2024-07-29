@@ -1,7 +1,8 @@
 import React from "react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
-import { Container } from ".";
+import { Container, SearchInput } from ".";
 
 import { Button } from "../ui";
 import { ArrowRight, ShoppingCart, User } from "lucide-react";
@@ -15,19 +16,26 @@ export const Header: React.FC<Props> = ({ className }) => {
     <header className={cn("border border-b", className)}>
       <Container className="flex items-center justify-between py-8 px-4">
         {/* Left size */}
-        <div className="flex items-center gap-4">
-          <img
-            src="https://media.dodostatic.net/image/r:292x292/11EE79702E2A22E693D96133906FB1B8.webp"
-            alt="Logo"
-            width={35}
-            height={35}
-          />
-          <div>
-            <h1 className="text-2xl uppercase font-black">coffeshop</h1>
-            <p className="text-sm text-gray-400 leading-3">
-              the best strategy game
-            </p>
+        <Link href="/">
+          <div className="flex items-center gap-4">
+            <img
+              src="https://media.dodostatic.net/image/r:292x292/11EE79702E2A22E693D96133906FB1B8.webp"
+              alt="Logo"
+              width={35}
+              height={35}
+            />
+            <div>
+              <h1 className="text-2xl uppercase font-black">coffeshop</h1>
+              <p className="text-sm text-gray-400 leading-3">
+                the best strategy game
+              </p>
+            </div>
           </div>
+        </Link>
+
+        {/* Search input area */}
+        <div className="mx-10 flex-1">
+          <SearchInput />
         </div>
 
         {/* Right size */}
