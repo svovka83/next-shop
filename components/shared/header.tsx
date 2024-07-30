@@ -19,15 +19,15 @@ export const Header: React.FC<Props> = ({ className }) => {
         <Link href="/">
           <div className="flex items-center gap-4">
             <img
-              src="https://media.dodostatic.net/image/r:292x292/11EE79702E2A22E693D96133906FB1B8.webp"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd_vyFwMluDdHjAoieNO1coxrDBZqxe17LyA&s"
               alt="Logo"
-              width={35}
-              height={35}
+              width={50}
+              height={50}
             />
             <div>
-              <h1 className="text-2xl uppercase font-black">coffeshop</h1>
-              <p className="text-sm text-gray-400 leading-3">
-                the best strategy game
+              <h1 className="text-2xl uppercase font-black">cocktails</h1>
+              <p className="text-base text-gray-400 leading-3">
+                the biggest choice
               </p>
             </div>
           </div>

@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
         mode: "insensitive", // чуттєвість до регістру - "insensitive" немає чуттєвості до регістру
       },
     },
-    take: 3, // кількість продуктів для пошуку
+    take: 5, // кількість продуктів для пошуку
   });
 
   return NextResponse.json(products);
