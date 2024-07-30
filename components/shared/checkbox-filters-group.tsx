@@ -1,9 +1,8 @@
 "use client";
 
 import React from "react";
-import { cn } from "@/lib/utils";
 
-import { Input } from "../ui";
+import { Input, Skeleton } from "../ui";
 
 import { FilterCheckbox, FilterCheckboxProps } from "./filter-checkbox";
 
@@ -16,9 +15,11 @@ interface Props {
   limit?: number;
   loading?: boolean;
   searchInputPlaceholder?: string;
-  onChange?: (value: string[]) => void;
+  onClickCheckbox?: (id: string) => void;
   defaultValue?: string[];
+  selectedIds?: Set<string>;
   className?: string;
+  name?: string;
 }
 
 export const CheckboxFiltersGroup: React.FC<Props> = ({
@@ -26,10 +27,13 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
   items,
   defaultItems,
   limit = 4,
+  loading,
   searchInputPlaceholder = "search...",
   className,
-  onChange,
+  onClickCheckbox,
+  selectedIds,
   defaultValue,
+  name,
 }) => {
   const [showAll, setShowAll] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState("");
@@ -38,6 +42,19 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
     setSearchValue(event.target.value);
   };
 
+  if (loading) {
+    return (
+      <div className={className}>
+        <p className="font-bold pt-3 mb-3">{title}</p>
+
+        {...Array(limit).fill(0).map((_, index) => (
+          <Skeleton key={index} className="h-6 mb-4 rounded-[8px]" />
+        ))}
+        <Skeleton className="w-24 h-6 mb-4 rounded-[8px]" />
+      </div>
+    );
+  }
+
   const list = showAll
     ? items.filter((item) =>
         item.text.toLowerCase().includes(searchValue.toLocaleLowerCase())
@@ -45,7 +62,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
     : defaultItems.slice(0, limit);
 
   return (
-    <div className={cn("", className)}>
+    <div className={className}>
       <p className="font-bold pt-3 mb-3">{title}</p>
 
       {showAll && (
@@ -64,10 +81,11 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
           <FilterCheckbox
             key={index}
             text={item.text}
-            value={item.value}
+            value={item.value} // значення чекбоксу
             endAdornment={item.endAdornment}
-            checked={false}
-            onCheckedChange={(ids) => console.log(ids)}
+            checked={selectedIds?.has(item.value)} // чи в множині selectedIds є item.value         
+            onCheckedChange={() => onClickCheckbox?.(item.value)} // функція для додавання елемента до множини selectedIds
+            name={name}
           />
         ))}
       </div>
