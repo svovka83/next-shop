@@ -14,6 +14,7 @@ interface Props {
   items: Item[];
   defaultItems: Item[];
   limit?: number;
+  loading?: boolean;
   searchInputPlaceholder?: string;
   onChange?: (value: string[]) => void;
   defaultValue?: string[];
@@ -24,7 +25,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
   title,
   items,
   defaultItems,
-  limit = 3,
+  limit = 4,
   searchInputPlaceholder = "search...",
   className,
   onChange,
@@ -43,7 +44,6 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
       )
     : defaultItems.slice(0, limit);
 
-  console.log(items.length);
   return (
     <div className={cn("", className)}>
       <p className="font-bold pt-3 mb-3">{title}</p>
@@ -59,7 +59,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
         </div>
       )}
 
-      <div className="flex flex-col gap-4 max-h-32 pr-2 overflow-auto scrollbar">
+      <div className="flex flex-col gap-4 max-h-36 pr-2 overflow-auto scrollbar">
         {list.map((item, index) => (
           <FilterCheckbox
             key={index}

@@ -1,15 +1,25 @@
+"use client";
+
 import React from "react";
 import { cn } from "@/lib/utils";
 
 import { CheckboxFiltersGroup, FilterCheckbox, RangeSlider, Title } from ".";
 
 import { Input } from "../ui";
+import { useFilterIngredients } from "@/hooks/useFilterIngredients";
 
 interface Props {
   className?: string;
 }
 
 export const Filters: React.FC<Props> = ({ className }) => {
+  const { ingredients } = useFilterIngredients();
+
+  const items = ingredients.map((item) => ({
+    value: String(item.id),
+    text: item.name,
+  }));
+
   return (
     <div className={cn("pl-4", className)}>
       <Title text="Filtration" size="sm" className="mb-5 font-bold" />
@@ -39,46 +49,14 @@ export const Filters: React.FC<Props> = ({ className }) => {
 
       {/* filter characteristic */}
       <CheckboxFiltersGroup
-        title="Characteristics"
+        title="Ingedients"
         className="mt-5"
-        limit={3}
-        defaultItems={[
-          {
-            text: "health",
-            value: "1",
-          },
-          {
-            text: "attack",
-            value: "2",
-          },
-          {
-            text: "defends",
-            value: "3",
-          },
-        ]}
-        items={[
-          {
-            text: "health",
-            value: "1",
-          },
-          {
-            text: "attack",
-            value: "2",
-          },
-          {
-            text: "defends",
-            value: "3",
-          },
-          {
-            text: "mana",
-            value: "4",
-          },
-          {
-            text: "price",
-            value: "5",
-            
-          },
-        ]}
+        limit={4}
+        defaultItems={items.slice(0, 4)}
+        items={items.map((item) => ({
+          text: item.text,
+          value: String(item.value),
+        }))}
       />
     </div>
   );

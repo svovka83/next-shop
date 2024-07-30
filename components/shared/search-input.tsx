@@ -16,9 +16,9 @@ interface Props {
 }
 
 export const SearchInput: React.FC<Props> = ({ className }) => {
-  const [searchQuery, setSearchQuery] = React.useState("");
+  const [searchQuery, setSearchQuery] = React.useState(""); // відповідає за значення з інпуту
   const [focused, setFocused] = React.useState(false);
-  const [products, setProducts] = React.useState<Product[]>([]);
+  const [products, setProducts] = React.useState<Product[]>([]); // відповідає за список продуктів отриманих зі пошукового запиту
   const ref = React.useRef<HTMLInputElement>(null);
 
   useClickAway(ref, () => {
@@ -26,12 +26,23 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
   });
 
   useDebounce(
-    () => {
-      Api.products.search(searchQuery).then((data) => setProducts(data));
+    async () => {
+      try {
+        const data = await Api.products.search(searchQuery);
+        setProducts(data);
+      } catch (error) {
+        console.log(error);
+      }
     },
     500,
     [searchQuery]
   );
+
+  const onClickItem = () => {
+    setFocused(false);
+    setSearchQuery("");
+    setProducts([]);
+  };
 
   return (
     <>
@@ -68,7 +79,8 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
             {products.map((product) => (
               <Link
                 key={product.id}
-                href={`/products/${product.id}`}
+                href={`/product/${product.id}`}
+                onClick={onClickItem}
                 className="flex items-center gap-3 px-4 py-2 hover:bg-primary/10"
               >
                 <img
