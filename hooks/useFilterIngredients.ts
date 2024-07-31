@@ -8,7 +8,7 @@ import { Ingredient } from "@prisma/client";
 interface ReturnProps {
   ingredients: Ingredient[];
   loading: boolean;
-  selectedIds: Set<string>; // множина вибраних інгредієнтів
+  selectedIngredients: Set<string>; // множина вибраних інгредієнтів
   onAddId: (id: string) => void; // функція для додавання елемента до множини
 }
 
@@ -33,5 +33,10 @@ export const useFilterIngredients = (): ReturnProps => {
     fetchIngredients();
   }, []);
 
-  return { ingredients, loading, onAddId: toggle, selectedIds };
+  return {
+    ingredients,
+    loading,
+    onAddId: toggle,
+    selectedIngredients: selectedIds,
+  };
 };

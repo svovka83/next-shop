@@ -1,11 +1,14 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useSet } from "react-use";
+import qs from "qs";
 
 import { Input } from "../ui";
 
-import { CheckboxFiltersGroup, FilterCheckbox, RangeSlider, Title } from ".";
+import { CheckboxFiltersGroup, RangeSlider, Title } from ".";
 
 import { useFilterIngredients } from "@/hooks/useFilterIngredients";
 
@@ -19,7 +22,14 @@ interface PriceProps {
 }
 
 export const Filters: React.FC<Props> = ({ className }) => {
-  const { ingredients, loading, onAddId, selectedIds } = useFilterIngredients(); // хук для фільтрування інгредієнтів
+  const router = useRouter();
+
+  const { ingredients, loading, onAddId, selectedIngredients } =
+    useFilterIngredients(); // хук для фільтрування інгредієнтів
+
+  const [strengths, { toggle: toggleStrength }] = useSet(new Set<string>([]));
+  const [sizes, { toggle: toggleSizes }] = useSet(new Set<string>([]));
+
   const [price, setPrice] = React.useState<PriceProps>({
     priceFrom: 0,
     priceTo: 100,
@@ -28,6 +38,19 @@ export const Filters: React.FC<Props> = ({ className }) => {
   const updatePrice = (name: keyof PriceProps, value: number) => {
     setPrice({ ...price, [name]: value });
   };
+
+  React.useEffect(() => {
+    const filters = {
+      ...price,
+      strengths: Array.from(strengths),
+      sizes: Array.from(sizes),
+      ingredients: Array.from(selectedIngredients),
+    };
+
+    const query = qs.stringify(filters, { // формуємо query params для url-адреси
+      arrayFormat: "comma",
+    });
+  }, [price, strengths, sizes, selectedIngredients]);
 
   const items = ingredients.map((item) => ({
     value: String(item.id),
@@ -39,20 +62,32 @@ export const Filters: React.FC<Props> = ({ className }) => {
       <Title text="Filtration" size="sm" className="mb-5 font-bold" />
 
       {/* checkbox filters group - Cocktail strength */}
-      <div className="flex flex-col gap-4">
-        <Title text="Cocktail strength" size="sm" className="mt-5 font-bold" />
-        <FilterCheckbox text="light" value="1" name="cocktail strength" />
-        <FilterCheckbox text="medium" value="2" name="cocktail strength" />
-        <FilterCheckbox text="strong" value="3" name="cocktail strength" />
-      </div>
+      <CheckboxFiltersGroup
+        title="Cocktail strength"
+        name="strength"
+        className="mb-5"
+        onClickCheckbox={toggleStrength}
+        selected={strengths}
+        items={[
+          { text: "light", value: "1" },
+          { text: "medium", value: "2" },
+          { text: "strong", value: "3" },
+        ]}
+      />
 
       {/* checkbox filters group - Cocktail size */}
-      <div className="flex flex-col gap-4">
-        <Title text="Cocktail size" size="sm" className="mt-5 font-bold" />
-        <FilterCheckbox text="small" value="1" name="Cocktail size" />
-        <FilterCheckbox text="medium" value="2" name="Cocktail size" />
-        <FilterCheckbox text="big" value="3" name="Cocktail size" />
-      </div>
+      <CheckboxFiltersGroup
+        title="Cocktail size"
+        name="sizes"
+        className="mb-5"
+        onClickCheckbox={toggleSizes}
+        selected={sizes}
+        items={[
+          { text: "small", value: "1" },
+          { text: "medium", value: "2" },
+          { text: "big", value: "3" },
+        ]}
+      />
 
       {/* filter price */}
       <div className="mt-5 border-y border-y-neutral-100 py-5 pb-7">
@@ -91,7 +126,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
         />
       </div>
 
-      {/* filter characteristic */}
+      {/* filter ingredients */}
       <CheckboxFiltersGroup
         title="Ingedients"
         name="ingredients"
@@ -103,8 +138,8 @@ export const Filters: React.FC<Props> = ({ className }) => {
           value: String(item.value),
         }))}
         loading={loading}
-        onClickCheckbox={onAddId} // функція для додавання елемента до множини
-        selectedIds={selectedIds}
+        onClickCheckbox={onAddId} // функція для додавання елемента до множини selectedIngredients
+        selected={selectedIngredients}
       />
     </div>
   );

@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <Container className="mt-10">
-        <Title text="All races" size="lg" className="font-extrabold pl-10" />
+        <Title text="All cocktails" size="lg" className="font-extrabold pl-10" />
       </Container>
       <TopBar />
       <Container className="mt-10 pb-14 ">
@@ -24,7 +24,7 @@ export default function Home() {
           <div className="flex-1">
             <div className="flex flex-col px-4">
               <ProductsGroupList
-                title="zerg"
+                title="Fresh"
                 items={[
                   {
                     id: 1,
@@ -56,7 +56,7 @@ export default function Home() {
                 className=""
               />
               <ProductsGroupList
-                title="terran"
+                title="Chocolate"
                 items={[
                   {
                     id: 1,
@@ -88,7 +88,7 @@ export default function Home() {
                 className=""
               />
               <ProductsGroupList
-                title="protoss"
+                title="Fruits"
                 items={[
                   {
                     id: 1,
