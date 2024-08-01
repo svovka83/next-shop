@@ -1,61 +1,30 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { useSet } from "react-use";
-import qs from "qs";
-
 import { Input } from "../ui";
-
 import { CheckboxFiltersGroup, RangeSlider, Title } from ".";
-
-import { useFilterIngredients } from "@/hooks/useFilterIngredients";
+import { useFilters, useQueryFilters, useIngredients } from "@/hooks";
 
 interface Props {
   className?: string;
 }
 
-interface PriceProps {
-  priceFrom: number;
-  priceTo: number;
-}
-
 export const Filters: React.FC<Props> = ({ className }) => {
-  const router = useRouter();
+  const { ingredients, loading } = useIngredients();
+  const filters = useFilters();
 
-  const { ingredients, loading, onAddId, selectedIngredients } =
-    useFilterIngredients(); // хук для фільтрування інгредієнтів
-
-  const [strengths, { toggle: toggleStrength }] = useSet(new Set<string>([]));
-  const [sizes, { toggle: toggleSizes }] = useSet(new Set<string>([]));
-
-  const [price, setPrice] = React.useState<PriceProps>({
-    priceFrom: 0,
-    priceTo: 100,
-  });
-
-  const updatePrice = (name: keyof PriceProps, value: number) => {
-    setPrice({ ...price, [name]: value });
-  };
-
-  React.useEffect(() => {
-    const filters = {
-      ...price,
-      strengths: Array.from(strengths),
-      sizes: Array.from(sizes),
-      ingredients: Array.from(selectedIngredients),
-    };
-
-    const query = qs.stringify(filters, { // формуємо query params для url-адреси
-      arrayFormat: "comma",
-    });
-  }, [price, strengths, sizes, selectedIngredients]);
+  useQueryFilters(filters);
 
   const items = ingredients.map((item) => ({
     value: String(item.id),
     text: item.name,
   }));
+
+  const updatePrices = (prices: number[]) => {
+    filters.setPrices("priceFrom", prices[0]);
+    filters.setPrices("priceTo", prices[1]);
+  };
 
   return (
     <div className={cn("pl-4", className)}>
@@ -66,8 +35,8 @@ export const Filters: React.FC<Props> = ({ className }) => {
         title="Cocktail strength"
         name="strength"
         className="mb-5"
-        onClickCheckbox={toggleStrength}
-        selected={strengths}
+        onClickCheckbox={filters.setStrengths}
+        selected={filters.strengths}
         items={[
           { text: "light", value: "1" },
           { text: "medium", value: "2" },
@@ -80,8 +49,8 @@ export const Filters: React.FC<Props> = ({ className }) => {
         title="Cocktail size"
         name="sizes"
         className="mb-5"
-        onClickCheckbox={toggleSizes}
-        selected={sizes}
+        onClickCheckbox={filters.setSizes}
+        selected={filters.sizes}
         items={[
           { text: "small", value: "1" },
           { text: "medium", value: "2" },
@@ -98,9 +67,9 @@ export const Filters: React.FC<Props> = ({ className }) => {
             placeholder="0"
             min={0}
             max={100}
-            value={String(price.priceFrom)}
+            value={String(filters.prices.priceFrom)}
             onChange={(event) =>
-              updatePrice("priceFrom", Number(event.target.value))
+              filters.setPrices("priceFrom", Number(event.target.value))
             }
           />
           <Input
@@ -108,9 +77,9 @@ export const Filters: React.FC<Props> = ({ className }) => {
             placeholder="100"
             min={10}
             max={100}
-            value={String(price.priceTo)}
+            value={String(filters.prices.priceTo)}
             onChange={(event) =>
-              updatePrice("priceTo", Number(event.target.value))
+              filters.setPrices("priceTo", Number(event.target.value))
             }
           />
         </div>
@@ -119,10 +88,8 @@ export const Filters: React.FC<Props> = ({ className }) => {
           min={0}
           max={100}
           step={1}
-          value={[price.priceFrom, price.priceTo]}
-          onValueChange={([from, to]) =>
-            setPrice({ priceFrom: from, priceTo: to })
-          }
+          value={[filters.prices.priceFrom || 0, filters.prices.priceTo || 100]}
+          onValueChange={updatePrices}
         />
       </div>
 
@@ -138,8 +105,8 @@ export const Filters: React.FC<Props> = ({ className }) => {
           value: String(item.value),
         }))}
         loading={loading}
-        onClickCheckbox={onAddId} // функція для додавання елемента до множини selectedIngredients
-        selected={selectedIngredients}
+        onClickCheckbox={filters.setSelectedIngredients} // функція для додавання елемента до множини selectedIngredients
+        selected={filters.selectedIngredients}
       />
     </div>
   );
