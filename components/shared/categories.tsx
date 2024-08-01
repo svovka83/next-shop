@@ -10,9 +10,11 @@ interface Props {
 }
 
 export const races = [
-  { id: 1, name: "Fresh" },
-  { id: 2, name: "Chocolate" },
-  { id: 3, name: "Fruits" },
+  { id: 1, name: "pizza" },
+  { id: 2, name: "breakfast" },
+  { id: 3, name: "appetizer" },
+  { id: 4, name: "cocktails" },
+  { id: 5, name: "drinks" },
 ];
 
 export const Categories: React.FC<Props> = ({ className }) => {

@@ -24,7 +24,7 @@ export const ProductCard: React.FC<Props> = ({
   return (
     <div className={cn("", className)}>
       <Link href={`/product/${id}`}>
-        <div className="flex flex-col justify-center p-6 bg-secondary">
+        <div className="flex flex-col p-6 bg-secondary">
           <img className="w-[215px] h-[215px]" src={imageURL} alt={name} />
 
           <Title text={name} size="sm" className="mb-1 mt-1 font-bold" />
@@ -33,7 +33,7 @@ export const ProductCard: React.FC<Props> = ({
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           </p>
 
-          <div className="flex flex-wrap justify-between items-center mt-4">
+          <div className="flex justify-between items-center mt-4">
             <span className="text-[20px]">Price: {price} $</span>
             <Button variant="outline" className="text-base font-bold">
               <Plus size={20} className="mr-1" />

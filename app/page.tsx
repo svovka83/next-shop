@@ -5,15 +5,32 @@ import {
   Filters,
   ProductsGroupList,
 } from "@/components/shared";
+import { prisma } from "@/prisma/prisma-client";
 
-export default function Home() {
+export default async function Home() {
+  const catagories = await prisma.category.findMany({
+    include: {
+      products: {
+        // відображення продуктів в категоріях
+        include: {
+          items: true, // відображення списків продуктів в категоріях
+          ingredients: true, // відображення інгредієнтів
+        },
+      },
+    },
+  });
+
   return (
     <>
       <Container className="mt-10">
-        <Title text="All cocktails" size="lg" className="font-extrabold pl-10" />
+        <Title
+          text="All cocktails"
+          size="lg"
+          className="font-extrabold pl-10"
+        />
       </Container>
       <TopBar />
-      <Container className="mt-10 pb-14 ">
+      <Container className="mt-8 pb-14 ">
         <div className="flex gap-[60px]">
           {/* filtration */}
           <div className="w-[250px]">
@@ -23,102 +40,17 @@ export default function Home() {
           {/* list products */}
           <div className="flex-1">
             <div className="flex flex-col px-4">
-              <ProductsGroupList
-                title="Fresh"
-                items={[
-                  {
-                    id: 1,
-                    name: "zerling",
-                    imageURL: "",
-                    price: 1,
-                  },
-                  {
-                    id: 2,
-                    name: "gidralisk",
-                    imageURL: "",
-                    price: 2,
-                  },
-                  {
-                    id: 3,
-                    name: "mutalisk",
-                    imageURL: "",
-                    price: 3,
-                  },
-                  {
-                    id: 4,
-                    name: "ultralisk",
-                    imageURL: "",
-                    price: 6,
-                  },
-                ]}
-                categoryId={1}
-                listClassName=""
-                className=""
-              />
-              <ProductsGroupList
-                title="Chocolate"
-                items={[
-                  {
-                    id: 1,
-                    name: "zerling",
-                    imageURL: "",
-                    price: 1,
-                  },
-                  {
-                    id: 2,
-                    name: "gidralisk",
-                    imageURL: "",
-                    price: 2,
-                  },
-                  {
-                    id: 3,
-                    name: "mutalisk",
-                    imageURL: "",
-                    price: 3,
-                  },
-                  {
-                    id: 4,
-                    name: "ultralisk",
-                    imageURL: "",
-                    price: 6,
-                  },
-                ]}
-                categoryId={2}
-                listClassName=""
-                className=""
-              />
-              <ProductsGroupList
-                title="Fruits"
-                items={[
-                  {
-                    id: 1,
-                    name: "zerling",
-                    imageURL: "",
-                    price: 1,
-                  },
-                  {
-                    id: 2,
-                    name: "gidralisk",
-                    imageURL: "",
-                    price: 2,
-                  },
-                  {
-                    id: 3,
-                    name: "mutalisk",
-                    imageURL: "",
-                    price: 3,
-                  },
-                  {
-                    id: 4,
-                    name: "ultralisk",
-                    imageURL: "",
-                    price: 6,
-                  },
-                ]}
-                categoryId={3}
-                listClassName=""
-                className=""
-              />
+              {catagories.map(
+                (category) =>
+                  category.products.length > 0 && (
+                    <ProductsGroupList
+                      key={category.id}
+                      title={category.name}
+                      categoryId={category.id}
+                      items={category.products}
+                    />
+                  )
+              )}
             </div>
           </div>
         </div>
