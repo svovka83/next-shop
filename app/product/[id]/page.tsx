@@ -1,8 +1,11 @@
-import { Container, ProductImage, Title } from "@/components/shared";
-import { Button } from "@/components/ui";
 import { prisma } from "@/prisma/prisma-client";
-import { Plus } from "lucide-react";
 import { notFound } from "next/navigation"; // для відображення сторінки 404
+import {
+  Container,
+  GroupVariants,
+  ProductImage,
+  Title,
+} from "@/components/shared";
 
 export default async function ProductPage({
   params: { id },
@@ -20,21 +23,22 @@ export default async function ProductPage({
   }
 
   return (
-    <Container className="flex my-28">
-      <ProductImage imageUrl={product.imageUrl} size={20} className="" />
+    <Container className="grid grid-cols-2 py-14">
+      <ProductImage imageUrl={product.imageUrl} size={30} className="" />
 
-      <div className="w-[490px] bg-[#F5F5F5] p-7">
+      <div className="w-[400px] bg-[#F5F5F5] p-7 mx-auto">
         <Title text={product.name} size="md" className="mb-1 font-extrabold" />
 
         <p className="text-gray-400">Lorem ipsum dolor sit amet</p>
 
-        {/* <div className="flex justify-between items-center mt-4">
-            <span className="text-[20px]">Price: {textDetaills} $</span>
-            <Button variant="outline" className="text-base font-bold">
-              <Plus size={20} />
-              Add
-            </Button>
-          </div> */}
+        <GroupVariants
+          selectedValue="2"
+          items={[
+            { name: "Small", value: "1" },
+            { name: "Medium", value: "2" },
+            { name: "Large", value: "3", disabled: true },
+          ]}
+        />
       </div>
     </Container>
   );
