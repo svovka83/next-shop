@@ -10,7 +10,7 @@ interface Props {
   id: number;
   name: string;
   price: number;
-  imageURL: string;
+  imageUrl: string;
   className?: string;
 }
 
@@ -18,16 +18,20 @@ export const ProductCard: React.FC<Props> = ({
   id,
   name,
   price,
-  imageURL,
+  imageUrl,
   className,
 }) => {
   return (
     <div className={cn("", className)}>
       <Link href={`/product/${id}`}>
-        <div className="flex flex-col p-6 bg-secondary">
-          <img className="w-[215px] h-[215px]" src={imageURL} alt={name} />
+        <div className="flex flex-col p-6 bg-secondary/30">
+          <img
+            className="w-[230px] h-[210px] bg-secondary"
+            src={imageUrl}
+            alt={name}
+          />
 
-          <Title text={name} size="sm" className="mb-1 mt-1 font-bold" />
+          <Title text={name} size="sm" className="mb-1 mt-2 font-bold" />
 
           <p className="text-sm text-gray-400">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -36,7 +40,7 @@ export const ProductCard: React.FC<Props> = ({
           <div className="flex justify-between items-center mt-4">
             <span className="text-[20px]">Price: {price} $</span>
             <Button variant="outline" className="text-base font-bold">
-              <Plus size={20} className="mr-1" />
+              <Plus size={20} />
               Add
             </Button>
           </div>
