@@ -6,15 +6,24 @@ export const mapCocktailSize = {
 } as const;
 
 export const mapCocktailStrength = {
-  1: "light",
-  2: "medium",
-  3: "strong",
+  1: "Light",
+  2: "Medium",
+  3: "Strong",
 } as const;
 
 export const cocktailSizes = Object.entries(mapCocktailSize).map(
-  ([name, value]) => ({
-    // перетворюємо об'єкт в масив
-    name,
+  ([value, name]) => ({
     value,
+    name,
+  })
+); // перетворюємо об'єкт в масив
+
+export const cocktailStrengths = Object.entries(mapCocktailStrength).map(
+  ([value, name]) => ({
+    value,
+    name,
   })
 );
+
+export type CocktailSizes = keyof typeof mapCocktailSize;
+export type CocktailStrengths = keyof typeof mapCocktailStrength;
