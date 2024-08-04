@@ -11,6 +11,8 @@ import {
   mapCocktailStrength,
 } from "@/shared/constants/cocktail";
 import { Ingredient, ProductItem } from "@prisma/client";
+import { CalcTotalCocktailPrice } from "@/shared/lib";
+
 
 interface Props {
   name: string;
@@ -38,25 +40,20 @@ export const ChooseCocktailForm: React.FC<Props> = ({
 
   const textDetails = `size: ${size} ml, strength: ${mapCocktailStrength[strength]} ( ${strength} % )`;
 
-  const cocktailPrice = items.find(
-    (item) => item.size === size && item.strength === strength
-  )?.price;
-  const totalIngredientsPrice = ingredients
-    .filter((ingredient) => selectedIngredients.has(ingredient.id))
-    .reduce((acc, ingredient) => acc + ingredient.price, 0);
+  const totalPrice = CalcTotalCocktailPrice(
+    size,
+    strength,
+    items,
+    ingredients,
+    selectedIngredients
+  );
 
-  const totalPrice = cocktailPrice ? cocktailPrice + totalIngredientsPrice : 0; // якщо присутній cocktailPrice, то totalPrice = cocktailPrice + totalIngredientsPrice, інакше totalPrice = 0 !!!
-
-  const handleClickAddCart = () => {
-    onClickAddCart?.();
-  };
-
-  const availableCocktailsBySize = items.filter((item) => item.size === size); // отримуємо доступні коктеєли за наявним розміром
+  const filteredCocktailsBySize = items.filter((item) => item.size === size); // отримуємо доступні коктеєли за наявним розміром
   const availableCocktailStrength = cocktailStrengths.map((item) => ({
     // створюємо новий масив з доступними варіантами strength
     value: item.value,
     name: item.name,
-    disabled: !availableCocktailsBySize.some(
+    disabled: !filteredCocktailsBySize.some(
       // перевіряємо, чи є доступний варіант strength у доступних коктеєлях за наявним розміром
       (cocktail) => Number(cocktail.strength) === Number(item.value)
     ),
@@ -74,6 +71,10 @@ export const ChooseCocktailForm: React.FC<Props> = ({
       setStrength(Number(firstAvailableStrength.value) as CocktailStrengths);
     }
   }, [size]);
+
+  const handleClickAddCart = () => {
+    onClickAddCart?.();
+  };
 
   return (
     <div className={cn("flex flex-1", className)}>
