@@ -14,7 +14,7 @@ interface Props {
 
 export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
   const router = useRouter();
-  const isPizzaForm = Boolean(product.items[0]);
+  const isCocktailForm = Boolean(product.ingredients[0]);
 
   return (
     <Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
@@ -25,7 +25,7 @@ export const ChooseProductModal: React.FC<Props> = ({ product, className }) => {
           className
         )}
       >
-        {isPizzaForm ? (
+        {isCocktailForm ? (
           <ChooseCocktailForm
             imageUrl={product.imageUrl}
             name={product.name}
