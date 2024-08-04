@@ -8,6 +8,7 @@ import {
   CocktailStrengths,
   cocktailSizes,
   cocktailStrengths,
+  mapCocktailStrength,
 } from "@/shared/constants/cocktail";
 import { Ingredient, ProductItem } from "@prisma/client";
 
@@ -29,16 +30,50 @@ export const ChooseCocktailForm: React.FC<Props> = ({
   className,
 }) => {
   const [size, setSize] = React.useState<CocktailSizes>(25);
-  const [strength, setStrength] = React.useState<CocktailStrengths>(1);
+  const [strength, setStrength] = React.useState<CocktailStrengths>(2);
 
   const [selectedIngredients, { toggle: addIngredient }] = useSet(
     new Set<number>([])
   );
 
-  const textDetails = "something more information about product";
-  const totalPrice = "100$";
+  const textDetails = `size: ${size} ml, strength: ${mapCocktailStrength[strength]} ( ${strength} % )`;
 
-  console.log(items);
+  const cocktailPrice = items.find(
+    (item) => item.size === size && item.strength === strength
+  )?.price;
+  const totalIngredientsPrice = ingredients
+    .filter((ingredient) => selectedIngredients.has(ingredient.id))
+    .reduce((acc, ingredient) => acc + ingredient.price, 0);
+
+  const totalPrice = cocktailPrice ? cocktailPrice + totalIngredientsPrice : 0; // якщо присутній cocktailPrice, то totalPrice = cocktailPrice + totalIngredientsPrice, інакше totalPrice = 0 !!!
+
+  const handleClickAddCart = () => {
+    onClickAddCart?.();
+  };
+
+  const availableCocktailsBySize = items.filter((item) => item.size === size); // отримуємо доступні коктеєли за наявним розміром
+  const availableCocktailStrength = cocktailStrengths.map((item) => ({
+    // створюємо новий масив з доступними варіантами strength
+    value: item.value,
+    name: item.name,
+    disabled: !availableCocktailsBySize.some(
+      // перевіряємо, чи є доступний варіант strength у доступних коктеєлях за наявним розміром
+      (cocktail) => Number(cocktail.strength) === Number(item.value)
+    ),
+  }));
+
+  React.useEffect(() => {
+    const isAvailableStrength = availableCocktailStrength?.find(
+      (item) => Number(item.value) === strength && !item.disabled
+    ); // шукаємо current strength іперевіряємо, чи він незадізейблений
+    const firstAvailableStrength = availableCocktailStrength?.find(
+      (item) => !item.disabled
+    ); // шукаємо перший незадізейблений strength
+
+    if (!isAvailableStrength && firstAvailableStrength) {
+      setStrength(Number(firstAvailableStrength.value) as CocktailStrengths);
+    }
+  }, [size]);
 
   return (
     <div className={cn("flex flex-1", className)}>
@@ -66,7 +101,7 @@ export const ChooseCocktailForm: React.FC<Props> = ({
           />
 
           <GroupVariants
-            items={cocktailStrengths}
+            items={availableCocktailStrength} // доступні варіанти strength
             selectedValue={String(strength)}
             onClick={(value) => setStrength(Number(value) as CocktailStrengths)}
           />
@@ -87,7 +122,10 @@ export const ChooseCocktailForm: React.FC<Props> = ({
           </div>
         </div>
 
-        <Button className="h-[55px] px-10 mt-8 text-base rounded-[18px] w-full">
+        <Button
+          onClick={handleClickAddCart}
+          className="h-[55px] px-10 mt-8 text-base rounded-[18px] w-full"
+        >
           Add to basket for {totalPrice}
         </Button>
       </div>
