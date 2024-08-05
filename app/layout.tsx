@@ -18,7 +18,7 @@ export default function RootLayout({
         <link
           data-rh="true"
           rel="icon"
-          href="https://pintashymkent.kz/thumb/2/lzOLviPj8rS6TMwBcwl5iQ/750r750/d/63315fb39faf8-removebg-preview_1.png"
+          href="https://cdn.dodostatic.net/static/Img/Ingredients/000D3A21DA51A81211E9AFA6795BA2A0"
         />
       </head>
       <body className={nunito.className}>{children}</body>
