@@ -6,9 +6,9 @@ export const mapCocktailSize = {
 } as const;
 
 export const mapCocktailStrength = {
-  2: "Light",
-  4: "Medium",
-  8: "Strong",
+  1: "Light",
+  2: "Medium",
+  3: "Strong",
 } as const;
 
 export const cocktailSizes = Object.entries(mapCocktailSize).map(

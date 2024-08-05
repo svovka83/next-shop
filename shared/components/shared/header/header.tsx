@@ -2,8 +2,8 @@ import React from "react";
 import { cn } from "@/shared/lib/utils";
 import Link from "next/link";
 
-import { CartButton, Container, SearchInput } from ".";
-import { Button } from "../ui";
+import { CartButton, Container, SearchInput } from "..";
+import { Button } from "../../ui";
 import { User } from "lucide-react";
 
 interface Props {
@@ -24,9 +24,9 @@ export const Header: React.FC<Props> = ({ className }) => {
               height={50}
             />
             <div>
-              <h1 className="text-2xl uppercase font-black">cocktails</h1>
+              <h1 className="text-2xl uppercase font-black">drink shop</h1>
               <p className="text-base text-gray-400 leading-3">
-                the biggest choice
+              the most diverse choice
               </p>
             </div>
           </div>

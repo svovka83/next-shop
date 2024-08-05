@@ -1,17 +1,11 @@
-"use client";
-
 import React from "react";
-
-import { Input, Skeleton } from "../ui";
-
+import { Input, Skeleton } from "../../ui";
 import { FilterCheckbox, FilterCheckboxProps } from "./filter-checkbox";
 
-type Item = FilterCheckboxProps;
-
 interface Props {
-  title: string;
-  items: Item[];
-  defaultItems?: Item[];
+  title: string; // назва групи чекбоксів
+  items: FilterCheckboxProps[]; // типізацію беремо з ./filter-checkbox компонента для чекбоксів
+  defaultItems?: FilterCheckboxProps[];
   limit?: number;
   loading?: boolean;
   searchInputPlaceholder?: string;
@@ -45,11 +39,13 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
   if (loading) {
     return (
       <div className={className}>
-        <p className="font-bold pt-3 mb-3">{title}</p>
+        <h3 className="font-bold pt-3 mb-3">{title}</h3>
 
-        {...Array(limit).fill(0).map((_, index) => (
-          <Skeleton key={index} className="h-6 mb-4 rounded-[8px]" />
-        ))}
+        {...Array(limit)
+          .fill(0)
+          .map((_, index) => (
+            <Skeleton key={index} className="h-6 mb-4 rounded-[8px]" />
+          ))}
         <Skeleton className="w-24 h-6 mb-4 rounded-[8px]" />
       </div>
     );
@@ -59,7 +55,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
     ? items.filter((item) =>
         item.text.toLowerCase().includes(searchValue.toLocaleLowerCase())
       )
-    : (defaultItems || items ).slice(0, limit);
+    : (defaultItems || items).slice(0, limit);
 
   return (
     <div className={className}>
@@ -83,7 +79,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
             text={item.text}
             value={item.value} // значення чекбоксу
             endAdornment={item.endAdornment}
-            checked={selected?.has(item.value)} // чи в множині selected є item.value         
+            checked={selected?.has(item.value)} // чи у множині selected присутнє значення item.value
             onCheckedChange={() => onClickCheckbox?.(item.value)} // функція для додавання елемента до множини selected
             name={name}
           />

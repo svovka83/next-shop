@@ -3,14 +3,12 @@
 import React from "react";
 import { cn } from "@/shared/lib/utils";
 import { useIntersection } from "react-use";
-
-import { ProductCard, Title } from ".";
-
+import { ProductCard, Title } from "..";
 import { useCategoryStore } from "@/shared/store/category";
 
 export interface Props {
   title: string;
-  items: any[];
+  itemsProduct: any[]; // список продуктів в категорії
   categoryId: number;
   className?: string;
   listClassName?: string;
@@ -18,7 +16,7 @@ export interface Props {
 
 export const ProductsGroupList: React.FC<Props> = ({
   title,
-  items,
+  itemsProduct,
   categoryId,
   className,
   listClassName,
@@ -37,16 +35,16 @@ export const ProductsGroupList: React.FC<Props> = ({
 
   return (
     <div className={className} id={title} ref={intersectionRef}>
-      <Title text={title} size="lg" className="font-extrabold my-5" />
+      <Title text={title} size="lg" className="font-extrabold my-5 ml-3" />
 
       <div className={cn("grid grid-cols-3 gap-[50px]", listClassName)}>
-        {items.map((product, index) => (
+        {itemsProduct.map((product, index) => (
           <ProductCard
             key={index}
             id={product.id}
             name={product.name}
             imageUrl={product.imageUrl}
-            price={product.items[0]?.price}
+            price={product.variants[0]?.price} // ціна продукту першої варіації продукту
           />
         ))}
       </div>

@@ -9,21 +9,21 @@ interface PriceProps {
 
 interface QueryFilters extends PriceProps {
   // extends включає всі властивості PriceProps
-  strengths: string;
+  types: string;
   sizes: string;
   ingredients: string;
 }
 
 export interface Filters {
   selectedIngredients: Set<string>;
-  strengths: Set<string>;
+  types: Set<string>;
   sizes: Set<string>;
   prices: PriceProps;
 }
 
 interface ReturnProps extends Filters {
   setPrices: (name: keyof PriceProps, value: number) => void;
-  setStrengths: (value: string) => void;
+  setTypes: (value: string) => void;
   setSizes: (value: string) => void;
   setSelectedIngredients: (value: string) => void;
 }
@@ -45,10 +45,10 @@ export const useFilters = (): ReturnProps => {
   {
     /* filters for strength and size */
   }
-  const [strengths, { toggle: toggleStrength }] = useSet(
+  const [types, { toggle: toggleTypes }] = useSet(
     new Set<string>(
-      searchParams.has("strengths") // перевіряємо наявність query params "strengths"
-        ? searchParams.get("strengths")?.split(",") // якщо є, то отримуємо значення через кому
+      searchParams.has("types") // перевіряємо наявність query params "types"
+        ? searchParams.get("types")?.split(",") // якщо є, то отримуємо значення через кому
         : []
     )
   );
@@ -72,11 +72,11 @@ export const useFilters = (): ReturnProps => {
 
   return {
     selectedIngredients,
-    strengths,
+    types,
     sizes,
     prices,
     setSelectedIngredients: toggleIngredients,
-    setStrengths: toggleStrength,
+    setTypes: toggleTypes,
     setSizes: toggleSizes,
     setPrices: updatePrice,
   };

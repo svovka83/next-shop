@@ -9,7 +9,7 @@ export const useQueryFilters = (filters: Filters) => {
     React.useEffect(() => {
         const params = {
           ...filters.prices,
-          strengths: Array.from(filters.strengths),
+          types: Array.from(filters.types),
           sizes: Array.from(filters.sizes),
           ingredients: Array.from(filters.selectedIngredients),
         };

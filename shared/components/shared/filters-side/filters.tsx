@@ -2,8 +2,8 @@
 
 import React from "react";
 import { cn } from "@/shared/lib/utils";
-import { Input } from "../ui";
-import { CheckboxFiltersGroup, RangeSlider, Title } from ".";
+import { Input } from "../../ui";
+import { CheckboxFiltersGroup, RangeSlider, Title } from "..";
 import { useFilters, useQueryFilters, useIngredients } from "@/shared/hooks";
 
 interface Props {
@@ -30,31 +30,32 @@ export const Filters: React.FC<Props> = ({ className }) => {
     <div className={cn("pl-4", className)}>
       <Title text="Filtration" size="sm" className="mb-5 font-bold" />
 
-      {/* checkbox filters group - Cocktail strength */}
-      <CheckboxFiltersGroup
-        title="Cocktail strength"
-        name="strength"
-        className="mb-5"
-        onClickCheckbox={filters.setStrengths}
-        selected={filters.strengths}
-        items={[
-          { text: "light", value: "1" },
-          { text: "medium", value: "2" },
-          { text: "strong", value: "3" },
-        ]}
-      />
-
       {/* checkbox filters group - Cocktail size */}
       <CheckboxFiltersGroup
-        title="Cocktail size"
+        title="Drink size"
         name="sizes"
         className="mb-5"
         onClickCheckbox={filters.setSizes}
         selected={filters.sizes}
         items={[
-          { text: "Small", value: "1" },
-          { text: "Medium", value: "2" },
-          { text: "Large", value: "3" },
+          { text: "small", value: "1" },
+          { text: "medium", value: "2" },
+          { text: "large", value: "3" },
+          { text: "extra large", value: "4" },
+        ]}
+      />
+
+      {/* checkbox filters group - Cocktail strength */}
+      <CheckboxFiltersGroup
+        title="Drink type"
+        name="types"
+        className="mb-5"
+        onClickCheckbox={filters.setTypes}
+        selected={filters.types}
+        items={[
+          { text: "light", value: "1" },
+          { text: "medium", value: "2" },
+          { text: "strong", value: "3" },
         ]}
       />
 

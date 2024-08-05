@@ -13,7 +13,7 @@ export default async function Home() {
       products: {
         // відображення продуктів в категоріях
         include: {
-          items: true, // відображення списків продуктів в категоріях
+          variants: true, // відображення списків продуктів в категоріях
           ingredients: true, // відображення інгредієнтів
         },
       },
@@ -22,12 +22,8 @@ export default async function Home() {
 
   return (
     <>
-      <Container className="mt-10">
-        <Title
-          text="All cocktails"
-          size="lg"
-          className="font-extrabold pl-10"
-        />
+      <Container className="mt-8">
+        <Title text="All drinks" size="lg" className="font-extrabold pl-10" />
       </Container>
       <TopBar categories={catagories.filter((c) => c.products.length > 0)} />
       <Container className="mt-8 pb-14 ">
@@ -39,7 +35,7 @@ export default async function Home() {
 
           {/* list products */}
           <div className="flex-1">
-            <div className="flex flex-col px-4">
+            <div className="flex flex-col">
               {catagories.map(
                 (category) =>
                   category.products.length > 0 && (
@@ -47,7 +43,7 @@ export default async function Home() {
                       key={category.id}
                       title={category.name}
                       categoryId={category.id}
-                      items={category.products}
+                      itemsProduct={category.products} // список продуктів в категорії
                     />
                   )
               )}
