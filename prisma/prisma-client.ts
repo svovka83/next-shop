@@ -1,3 +1,5 @@
+// необхідний файл для підключення до бази даних за допомогою prisma ???
+
 import { PrismaClient } from "@prisma/client";
 
 const prismaClientSingleton = () => {

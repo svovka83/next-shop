@@ -18,15 +18,15 @@ export const Header: React.FC<Props> = ({ className }) => {
         <Link href="/">
           <div className="flex items-center gap-4">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd_vyFwMluDdHjAoieNO1coxrDBZqxe17LyA&s"
+              src="https://s7d1.scene7.com/is/image/mcdonalds/Best_McChicken-1:nutrition-calculator-tile"
               alt="Logo"
               width={50}
               height={50}
             />
             <div>
-              <h1 className="text-2xl uppercase font-black">drink shop</h1>
+              <h1 className="text-2xl uppercase font-black">Food shop</h1>
               <p className="text-base text-gray-400 leading-3">
-              the most diverse choice
+              the most delicious
               </p>
             </div>
           </div>

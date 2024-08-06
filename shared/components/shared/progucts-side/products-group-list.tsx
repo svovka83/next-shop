@@ -22,13 +22,13 @@ export const ProductsGroupList: React.FC<Props> = ({
   listClassName,
 }) => {
   const setActiveCategoryId = useCategoryStore((state) => state.setActiveId);
-  const intersectionRef = React.useRef(null);
+  const intersectionRef = React.useRef(null); 
   const intersection = useIntersection(intersectionRef, {
-    threshold: 0.5,
-  });
+    threshold: 0.4,
+  }); // хук для перевірки чи є елемент в зоні видимості
 
   React.useEffect(() => {
-    if (intersection?.isIntersecting) {
+    if (intersection?.isIntersecting) { 
       setActiveCategoryId(categoryId);
     }
   }, [categoryId, intersection?.isIntersecting, title]);

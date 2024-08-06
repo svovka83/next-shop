@@ -38,10 +38,10 @@ export const Filters: React.FC<Props> = ({ className }) => {
         onClickCheckbox={filters.setSizes}
         selected={filters.sizes}
         items={[
-          { text: "small", value: "1" },
-          { text: "medium", value: "2" },
-          { text: "large", value: "3" },
-          { text: "extra large", value: "4" },
+          { text: "small", value: "10" },
+          { text: "medium", value: "20" },
+          { text: "big", value: "30" },
+          { text: "extra big", value: "40" },
         ]}
       />
 
@@ -53,9 +53,9 @@ export const Filters: React.FC<Props> = ({ className }) => {
         onClickCheckbox={filters.setTypes}
         selected={filters.types}
         items={[
-          { text: "light", value: "1" },
-          { text: "medium", value: "2" },
-          { text: "strong", value: "3" },
+          { text: "thin", value: "1" },
+          { text: "normal", value: "2" },
+          { text: "massive", value: "3" },
         ]}
       />
 

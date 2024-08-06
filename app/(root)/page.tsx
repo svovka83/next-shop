@@ -23,7 +23,7 @@ export default async function Home() {
   return (
     <>
       <Container className="mt-8">
-        <Title text="All drinks" size="lg" className="font-extrabold pl-10" />
+        <Title text="All assortment" size="lg" className="font-extrabold pl-10" />
       </Container>
       <TopBar categories={catagories.filter((c) => c.products.length > 0)} />
       <Container className="mt-8 pb-14 ">

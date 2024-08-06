@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Header } from "@/shared/components/shared";
 
 export const metadata: Metadata = {
-  title: "Cocktail Shop",
+  title: "Food Shop",
   description: "Cocktail shop for all family",
 };
 
