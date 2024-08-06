@@ -1,7 +1,7 @@
 import { CalcTotalCocktailPrice } from "./calc-total-cocktail-price";
 import { Ingredient, ProductItem } from "@prisma/client";
-import { CocktailSizes, CocktailStrengths } from "../constants/cocktail";
-import { mapCocktailStrength } from "../constants/cocktail";
+import { CocktailSizes, CocktailStrengths } from "../constants/pizzaTypes";
+import { mapCocktailStrength } from "../constants/pizzaTypes";
 
 export const getCocktailDetails = (
   size: CocktailSizes,

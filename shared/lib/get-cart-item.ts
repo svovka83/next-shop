@@ -3,7 +3,7 @@ import {
   CocktailSizes,
   CocktailStrengths,
   mapCocktailStrength,
-} from "../constants/cocktail";
+} from "../constants/pizzaTypes";
 
 /**
  * функція для перетворення значення з об'єкту та масиву у рядок

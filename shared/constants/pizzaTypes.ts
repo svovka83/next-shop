@@ -1,14 +1,14 @@
 export const mapCocktailSize = {
-  25: "Small",
-  50: "Medium",
-  75: "Large",
-  100: "Extra large",
+  10: "Small",
+  20: "Medium",
+  30: "Big",
+  40: "Extra big",
 } as const;
 
 export const mapCocktailStrength = {
-  1: "Light",
-  2: "Medium",
-  3: "Strong",
+  1: "Thin",
+  2: "Normal",
+  3: "Massive",
 } as const;
 
 export const cocktailSizes = Object.entries(mapCocktailSize).map(

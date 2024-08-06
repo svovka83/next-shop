@@ -32,7 +32,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
 
       {/* checkbox filters group - Cocktail size */}
       <CheckboxFiltersGroup
-        title="Drink size"
+        title="Pizza size"
         name="sizes"
         className="mb-5"
         onClickCheckbox={filters.setSizes}
@@ -47,7 +47,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
 
       {/* checkbox filters group - Cocktail strength */}
       <CheckboxFiltersGroup
-        title="Drink type"
+        title="Pizza type"
         name="types"
         className="mb-5"
         onClickCheckbox={filters.setTypes}
@@ -99,8 +99,8 @@ export const Filters: React.FC<Props> = ({ className }) => {
         title="Ingedients"
         name="ingredients"
         className="mt-5"
-        limit={4}
-        defaultItems={items.slice(0, 4)}
+        limit={5}
+        defaultItems={items.slice(0, 5)}
         items={items.map((item) => ({
           text: item.text,
           value: String(item.value),

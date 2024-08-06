@@ -1,5 +1,5 @@
 import { ProductItem } from "@prisma/client";
-import { CocktailSizes, cocktailStrengths } from "../constants/cocktail";
+import { CocktailSizes, cocktailStrengths } from "../constants/pizzaTypes";
 import { Variant } from "../components/shared/group-variants";
 
 /**

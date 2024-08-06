@@ -8,7 +8,7 @@ import {
   CocktailSizes,
   CocktailStrengths,
   cocktailSizes,
-} from "@/shared/constants/cocktail";
+} from "@/shared/constants/pizzaTypes";
 import { Ingredient, ProductItem } from "@prisma/client";
 import { getCocktailDetails } from "@/shared/lib";
 import { useCocktailOptions } from "@/shared/hooks";

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSet } from "react-use";
-import { CocktailSizes, CocktailStrengths } from "../constants/cocktail";
+import { CocktailSizes, CocktailStrengths } from "../constants/pizzaTypes";
 import { getAvailableCocktailStrength } from "../lib";
 import { ProductItem } from "@prisma/client";
 import { Variant } from "../components/shared/group-variants";

@@ -33,10 +33,10 @@ export default async function ProductPage({
 
         <GroupVariants
           items={[
-            { name: "Small", value: "1" },
-            { name: "Medium", value: "2" },
-            { name: "Large", value: "3", disabled: true },
-            { name: "Extra Large", value: "4", disabled: true },
+            { name: "small", value: "10" },
+            { name: "medium", value: "20" },
+            { name: "big", value: "30", disabled: true },
+            { name: "extra big", value: "40", disabled: true },
           ]}
         />
       </div>

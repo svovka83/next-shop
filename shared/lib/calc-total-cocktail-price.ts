@@ -1,5 +1,5 @@
 import { Ingredient, ProductItem } from "@prisma/client";
-import { CocktailSizes, CocktailStrengths } from "../constants/cocktail";
+import { CocktailSizes, CocktailStrengths } from "../constants/pizzaTypes";
 
 /**
  * функція визначення загальної вартості коктеюля

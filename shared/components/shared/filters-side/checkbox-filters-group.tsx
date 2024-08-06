@@ -20,7 +20,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
   title,
   items,
   defaultItems,
-  limit = 4,
+  limit = 5,
   loading,
   searchInputPlaceholder = "search...",
   className,
@@ -72,7 +72,7 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
         </div>
       )}
 
-      <div className="flex flex-col gap-4 max-h-36 pr-2 overflow-auto scrollbar">
+      <div className="flex flex-col gap-4 max-h-[28vh] pr-2 overflow-auto scrollbar">
         {list.map((item, index) => (
           <FilterCheckbox
             key={index}
