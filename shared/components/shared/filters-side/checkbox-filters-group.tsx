@@ -13,7 +13,7 @@ interface Props {
   defaultValue?: string[];
   selected?: Set<string>;
   className?: string;
-  name?: string;
+  name: string; // примаємо ім'я групи чекбоксів для формування ідентифікації чекбокса
 }
 
 export const CheckboxFiltersGroup: React.FC<Props> = ({
@@ -37,12 +37,13 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({
   };
 
   if (loading) {
+    // відображаєм скелетон при завантаженні
     return (
       <div className={className}>
         <h3 className="font-bold pt-3 mb-3">{title}</h3>
 
         {...Array(limit)
-          .fill(0)
+          .fill(0) 
           .map((_, index) => (
             <Skeleton key={index} className="h-6 mb-4 rounded-[8px]" />
           ))}

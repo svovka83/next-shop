@@ -29,10 +29,11 @@ interface ReturnProps extends Filters {
 }
 
 export const useFilters = (): ReturnProps => {
+  // хук для отримання query params, в даному випадку для зберігання значень url в useSet-тах при перезавантаженні сторінки !!!
   const searchParams = useSearchParams() as unknown as Map<
-    keyof QueryFilters, // ключі властивостей QueryFilters
+    keyof QueryFilters,
     string
-  >; // хук для отримання query params, в даному випадку для зберігання значень url в useSet-тах при перезавантаженні сторінки !!!
+  >;
 
   {
     /* filters for ingredients */

@@ -4,19 +4,24 @@ import React from "react";
 import { cn } from "@/shared/lib/utils";
 import { Input } from "../../ui";
 import { CheckboxFiltersGroup, RangeSlider, Title } from "..";
-import { useFilters, useQueryFilters, useIngredients } from "@/shared/hooks";
+import {
+  useFilters,
+  useQueryFilters,
+  useFilterIngredients,
+} from "@/shared/hooks";
 
 interface Props {
   className?: string;
 }
 
 export const Filters: React.FC<Props> = ({ className }) => {
-  const { ingredients, loading } = useIngredients();
+  const { ingredients, loading } = useFilterIngredients();
   const filters = useFilters();
 
-  useQueryFilters(filters);
+  useQueryFilters(filters); // для отримання рядкової строки зі значеннями фільтрів
 
-  const items = ingredients.map((item) => ({
+  const ingredientItems = ingredients.map((item) => ({
+    // перетворюємо список інгредіїнтів в формат {value, text} замість отриманих з сервера {id, name, ...other}
     value: String(item.id),
     text: item.name,
   }));
@@ -99,11 +104,10 @@ export const Filters: React.FC<Props> = ({ className }) => {
         title="Ingedients"
         name="ingredients"
         className="mt-5"
-        limit={5}
-        defaultItems={items.slice(0, 5)}
-        items={items.map((item) => ({
-          text: item.text,
+        defaultItems={ingredientItems.slice(0, 5)}
+        items={ingredientItems.map((item) => ({
           value: String(item.value),
+          text: item.text,
         }))}
         loading={loading}
         onClickCheckbox={filters.setSelectedIngredients} // функція для додавання елемента до множини selectedIngredients

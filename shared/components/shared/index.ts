@@ -10,7 +10,7 @@ export { RangeSlider } from "./filters-side/range-slider";
 export { CheckboxFiltersGroup } from "./filters-side/checkbox-filters-group";
 export { ProductCard } from "./progucts-side/product-card";
 export { ProductsGroupList } from "./progucts-side/products-group-list";
-export { SearchInput } from "./search-input";
+export { SearchInput } from "./header/search-input";
 export { CocktailImage } from "./cocktail-image";
 export { GroupVariants } from "./group-variants";
 export { ChooseProductForm } from "./choose-product-form";

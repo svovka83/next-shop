@@ -19,10 +19,12 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
   const ref = React.useRef<HTMLInputElement>(null);
 
   useClickAway(ref, () => {
-    setFocused(false); // закриття пошукового вікна, якщо ми натиснули за межами вікна ref - посилання на вікно
+    // виклик функції, якщо був click за межами !!! прикріпленого ref на елемент
+    setFocused(false);
   });
 
   useDebounce(
+    // в useDebounce можна робити async-await на відміну від useEffect
     async () => {
       try {
         const data = await Api.products.search(searchQuery);
@@ -31,11 +33,11 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
         console.log(error);
       }
     },
-    500,
+    500, // таймаут в мілісекундах, при зміні параметру searchQuery, useDebounce почни виконуватись за 500 мілісекунд
     [searchQuery]
   );
 
-  const onClickItem = () => {
+  const clearAllStates = () => {
     setFocused(false);
     setSearchQuery("");
     setProducts([]);
@@ -77,7 +79,7 @@ export const SearchInput: React.FC<Props> = ({ className }) => {
               <Link
                 key={product.id}
                 href={`/product/${product.id}`}
-                onClick={onClickItem}
+                onClick={clearAllStates}
                 className="flex items-center gap-3 px-4 py-2 hover:bg-primary/10"
               >
                 <img
