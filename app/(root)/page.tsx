@@ -43,7 +43,7 @@ export default async function Home() {
                       key={category.id}
                       title={category.name}
                       categoryId={category.id}
-                      itemsProduct={category.products} // список продуктів в категорії
+                      itemProducts={category.products} // список продуктів в категорії
                     />
                   )
               )}

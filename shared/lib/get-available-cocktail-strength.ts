@@ -1,6 +1,6 @@
 import { ProductItem } from "@prisma/client";
 import { CocktailSizes, cocktailStrengths } from "../constants/pizzaTypes";
-import { Variant } from "../components/shared/group-variants";
+import { Variant } from "../components/shared/utils-product/group-variants";
 
 /**
  * функція отримання доступних варіантів міцності коктеюля за розміром

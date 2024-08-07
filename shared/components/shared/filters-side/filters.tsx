@@ -16,6 +16,7 @@ interface Props {
 
 export const Filters: React.FC<Props> = ({ className }) => {
   const { ingredients, loading } = useFilterIngredients();
+
   const filters = useFilters();
 
   useQueryFilters(filters); // для отримання рядкової строки зі значеннями фільтрів
@@ -43,10 +44,10 @@ export const Filters: React.FC<Props> = ({ className }) => {
         onClickCheckbox={filters.setSizes}
         selected={filters.sizes}
         items={[
-          { text: "small", value: "10" },
-          { text: "medium", value: "20" },
-          { text: "big", value: "30" },
-          { text: "extra big", value: "40" },
+          { text: "10 sm. small", value: "10" },
+          { text: "20 sm. medium", value: "20" },
+          { text: "30 sm. big", value: "30" },
+          { text: "40 sm. extra big", value: "40" },
         ]}
       />
 

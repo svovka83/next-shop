@@ -2,6 +2,12 @@ import React from "react";
 import { useSet } from "react-use";
 import { useSearchParams } from "next/navigation";
 
+/**
+ * хук для зберігання значень фільтрів
+ *
+ * @returns selectedIngredients, types, sizes, prices
+ * @returns setPrices, setTypes, setSizes, setSelectedIngredients
+ */
 interface PriceProps {
   priceFrom?: number;
   priceTo?: number;
@@ -35,33 +41,22 @@ export const useFilters = (): ReturnProps => {
     string
   >;
 
-  {
-    /* filters for ingredients */
-  }
   const [selectedIngredients, { toggle: toggleIngredients }] = useSet(
     new Set<string>(searchParams.get("ingredients")?.split(","))
   ); // хук для управління множиной вибраних інгредієнтів, toggle вміє додавати і видаляти елементи з множини
-  // values - масив інгредієнтів, які вибрані користувачем
 
-  {
-    /* filters for strength and size */
-  }
-  const [types, { toggle: toggleTypes }] = useSet(
-    new Set<string>(
-      searchParams.has("types") // перевіряємо наявність query params "types"
-        ? searchParams.get("types")?.split(",") // якщо є, то отримуємо значення через кому
-        : []
-    )
-  );
   const [sizes, { toggle: toggleSizes }] = useSet(
     new Set<string>(
       searchParams.has("sizes") ? searchParams.get("sizes")?.split(",") : []
     )
   );
 
-  {
-    /* filters for price */
-  }
+  const [types, { toggle: toggleTypes }] = useSet(
+    new Set<string>(
+      searchParams.has("types") ? searchParams.get("types")?.split(",") : []
+    )
+  );
+
   const [prices, setPrices] = React.useState<PriceProps>({
     priceFrom: Number(searchParams.get("priceFrom")) || undefined,
     priceTo: Number(searchParams.get("priceTo")) || undefined,

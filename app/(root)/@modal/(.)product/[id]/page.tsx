@@ -12,8 +12,8 @@ export default async function ProductModalPage({
       id: Number(id),
     },
     include: {
+      variants: true,
       ingredients: true,
-      items: true,
     },
   });
 

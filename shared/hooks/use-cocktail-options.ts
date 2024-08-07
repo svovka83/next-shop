@@ -3,7 +3,7 @@ import { useSet } from "react-use";
 import { CocktailSizes, CocktailStrengths } from "../constants/pizzaTypes";
 import { getAvailableCocktailStrength } from "../lib";
 import { ProductItem } from "@prisma/client";
-import { Variant } from "../components/shared/group-variants";
+import { Variant } from "../components/shared/utils-product/group-variants";
 
 /**
  *  хук для вибору розміру, міцності коктеюля та вибору інгредіїнтів

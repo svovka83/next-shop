@@ -7,7 +7,7 @@ interface Props {
   className?: string;
 }
 
-export const CocktailImage: React.FC<Props> = ({
+export const PizzaImage: React.FC<Props> = ({
   imageUrl,
   size,
   className,
@@ -20,10 +20,10 @@ export const CocktailImage: React.FC<Props> = ({
         className={cn(
           "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -transition-all duration-300 z-10",
           {
-            "w-[150px] h-[150px]": size === 25,
-            "w-[250px] h-[250px]": size === 50,
-            "w-[350px] h-[350px]": size === 75,
-            "w-[450px] h-[450px]": size === 100,
+            "w-[150px] h-[150px]": size === 10,
+            "w-[250px] h-[250px]": size === 20,
+            "w-[350px] h-[350px]": size === 30,
+            "w-[450px] h-[450px]": size === 40,
           }
         )}
       />
