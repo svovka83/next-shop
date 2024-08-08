@@ -2,15 +2,15 @@ import { Ingredient, ProductItem } from "@prisma/client";
 import { PizzaSizes, PizzaTypes } from "../../constants/pizzaTypes";
 
 /**
- * функція загальної вартості піци
+ * Функція загальної вартості піци
  *
- * @param size - розмір піци
- * @param type - тип піци
+ * @param size - розмір вибраної піци
+ * @param type - тип вибраної піци
  * @param variants - список варіантів піц
  * @param ingredients - список всіх інгредіїнтів
- * @param selectedIngredients - вибрані інгредіїнтів
+ * @param selectedIngredients - вибрані інгредіїнти
  *
- * @returns totalPrice загальна вартість піци number
+ * @returns number totalPrice загальна вартість піци
  */
 
 export const calcTotalPizzaPrice = (
@@ -23,6 +23,7 @@ export const calcTotalPizzaPrice = (
   const pizzaPrice = variants.find(
     (variant) => variant.size === size && variant.type === type
   )?.price;
+
   const totalIngredientsPrice = ingredients
     .filter((ingredient) => selectedIngredients.has(ingredient.id))
     .reduce((acc, ingredient) => acc + ingredient.price, 0);

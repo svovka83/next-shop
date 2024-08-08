@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { cn } from "@/shared/lib/utils";
 import { GroupVariants, PizzaImage, Title, Ingredients } from "..";
@@ -7,7 +5,6 @@ import { Button } from "../../ui";
 import {
   PizzaSizes,
   PizzaTypes,
-  pizzaSizes,
   pizzaTypes,
 } from "@/shared/constants/pizzaTypes";
 import { Ingredient, ProductItem } from "@prisma/client";

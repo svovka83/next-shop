@@ -6,14 +6,17 @@ import { Variant } from "../components/shared/pizza-utils/group-variants";
 import { getAvailablePizzaSizes } from "../components/functions";
 
 /**
- *  хук для вибору розміру, типу піци та вибору інгредіїнтів
+ * Хук для вибору розміру і типу піци, вибору інгредіїнтів та переключення розміру піци при вибраному типі на наступний, якщо він є неактивним
  *
- * @param size - розмір піци
- * @param type - тип піци
- * @param setSize - функція для зміни розміру піци
- * @param setType - функція для зміни типу піци
- * @param selectedIngredients - масив вибраних інгредіїнтів
- * @param addIngredient - функція для зміни масиву вибраних інгредіїнтів
+ * @param variants - список варіантів піц
+ *
+ * @returns size - розмір піци
+ * @returns type - тип піци
+ * @returns setSize - функція для зміни розміру піци
+ * @returns setType - функція для зміни типу піци
+ * @returns availablePizzaSizes - доступні варіанти розміру піци
+ * @returns selectedIngredients - масив вибраних інгредіїнтів
+ * @returns addIngredient - функція для зміни масиву вибраних інгредіїнтів
  */
 
 interface ReturnProps {
@@ -38,7 +41,7 @@ export const usePizzaOptions = (variants: ProductItem[]): ReturnProps => {
   React.useEffect(() => {
     const isAvailableSize = availablePizzaSizes?.find(
       (variant) => Number(variant.value) === size && !variant.disabled
-    ); // чи активний size незадізейблений
+    ); // чи є активний size незадізейблений
     const firstAvailableSize = availablePizzaSizes?.find(
       (variant) => !variant.disabled
     ); // шукаємо перший незадізейблений size
