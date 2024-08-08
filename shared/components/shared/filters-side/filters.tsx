@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { cn } from "@/shared/lib/utils";
+import { cn } from "@/lib/utils";
 import { Input } from "../../ui";
 import { CheckboxFiltersGroup, RangeSlider, Title } from "..";
 import {

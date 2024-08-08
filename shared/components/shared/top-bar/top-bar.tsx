@@ -1,5 +1,5 @@
 import React from "react";
-import { cn } from "@/shared/lib/utils";
+import { cn } from "@/lib/utils";
 import { Category } from "@prisma/client";
 import { Categories, Container, SortPopup } from "..";
 

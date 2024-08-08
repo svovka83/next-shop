@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { cn } from "@/shared/lib/utils";
+import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { ChoosePizzaForm, ChooseProductForm } from "..";
 import { ProductWithRelations } from "@/@types/prisma";
