@@ -14,7 +14,7 @@ import Link from "next/link";
 import { Button } from "../../ui";
 import { ArrowRight } from "lucide-react";
 import { CartDrawerItem } from "..";
-import { getCartItemDetails } from "@/shared/lib";
+import { getCartItemInfo } from "../../functions";
 
 interface Props {
   children: React.ReactNode;
@@ -36,17 +36,39 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
           </SheetTitle>
         </SheetHeader>
 
-        <div className="-mx-6 flex-1 overflow-auto">
+        <div className="-mx-6 flex-1 overflow-auto ">
           <div className="mb-2">
             <CartDrawerItem
               id={0}
               imageUrl={
                 "https://cdn.dodostatic.net/static/Img/Ingredients/000D3A21DA51A81211E9AFA6795BA2A0"
               }
-              details="pizza details"
-              name={"Cheese Fresh Crispy Cocktail"}
+              details={getCartItemInfo(30, 2, [
+                { id: 1, name: "cheese" },
+                { id: 2, name: "mushrooms" },
+                { id: 3, name: "bacon" },
+                { id: 4, name: "olives" },
+              ])}
+              name="Cheese"
               price={419}
-              quantity={1}
+              quantity={3}
+            />
+          </div>
+          <div className="mb-2">
+            <CartDrawerItem
+              id={0}
+              imageUrl={
+                "https://s7d1.scene7.com/is/image/mcdonalds/Best_McChicken-1:nutrition-calculator-tile"
+              }
+              details={getCartItemInfo(30, 2, [
+                { id: 1, name: "cheese" },
+                { id: 2, name: "mushrooms" },
+                { id: 3, name: "bacon" },
+                { id: 4, name: "olives" },
+              ])}
+              name="Cheese"
+              price={911}
+              quantity={2}
             />
           </div>
         </div>
