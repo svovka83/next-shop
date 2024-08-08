@@ -1,19 +1,19 @@
 import { Minus, Plus } from "lucide-react";
-import { CountButtonProps } from "./count-button";
-import { Button } from "../ui/button";
 import { cn } from "@/shared/lib/utils";
+import { CountButtonProps } from "./count-button";
+import { Button } from "../../ui/button";
 
 interface IconButtonProps {
   size?: CountButtonProps["size"];
+  operator?: "plus" | "minus";
   disabled?: boolean;
-  type?: "plus" | "minus";
   onClick?: () => void;
 }
 
 export const CountIconButton: React.FC<IconButtonProps> = ({
   size = "sm",
+  operator,
   disabled,
-  type,
   onClick,
 }) => {
   return (
@@ -29,9 +29,10 @@ export const CountIconButton: React.FC<IconButtonProps> = ({
           : "w-[38px] h-[38px] rounded-md"
       )}
     >
-      {type === "plus" ? (
+      {operator === "plus" && (
         <Plus className={size === "sm" ? "h-4" : "h-5"} />
-      ) : (
+      )}
+      {operator === "minus" && (
         <Minus className={size === "sm" ? "h-4" : "h-5"} />
       )}
     </Button>

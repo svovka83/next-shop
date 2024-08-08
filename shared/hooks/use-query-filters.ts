@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import qs from "qs"; // бібліотека для роботи з query params
 import { useRouter } from "next/navigation";

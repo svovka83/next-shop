@@ -1,8 +1,8 @@
 import React from "react";
 import { cn } from "@/shared/lib/utils";
-import { Button } from "../ui";
+import { Button } from "../../ui";
 import { ArrowRight, ShoppingCart } from "lucide-react";
-import { CartDrawer } from ".";
+import { CartDrawer } from "..";
 
 interface Props {
   className?: string;

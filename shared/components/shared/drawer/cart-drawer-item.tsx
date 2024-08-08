@@ -1,9 +1,8 @@
 import React from "react";
 import { cn } from "@/shared/lib/utils";
 
-import * as CartItem from "./cart-item-details";
-import { CartItemProps } from "./cart-item-details/cart-item-details.types";
-import { CountButton } from ".";
+import * as CartItem from "../cart-item-details";
+import { CartItemProps } from "../cart-item-details/cart-item.types";
 import { Trash2 } from "lucide-react";
 
 interface Props extends CartItemProps {
@@ -21,7 +20,7 @@ export const CartDrawerItem: React.FC<Props> = ({
 }) => {
   return (
     <div className={cn("flex bg-white p-5 gap-6", className)}>
-      <CartItem.Image src={imageUrl} />
+      <CartItem.Image imageUrl={imageUrl} />
 
       <div className="flex-1">
         <CartItem.Info name={name} details={details} />
@@ -29,10 +28,10 @@ export const CartDrawerItem: React.FC<Props> = ({
         <hr className="my-3" />
 
         <div className="flex items-center justify-between">
-          <CountButton value={quantity} onClick={() => {}} />
+          <CartItem.Button quantity={quantity} onClick={() => {}} />
 
           <div className="flex items-center gap-3">
-            <CartItem.Price value={price} />
+            <CartItem.Price price={price} />
             <Trash2
               className="text-gray-400 cursor-pointer hover:text-gray-600"
               size={16}

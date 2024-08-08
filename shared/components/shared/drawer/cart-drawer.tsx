@@ -11,9 +11,9 @@ import {
   SheetTrigger,
 } from "@/shared/components/ui/sheet";
 import Link from "next/link";
-import { Button } from "../ui";
+import { Button } from "../../ui";
 import { ArrowRight } from "lucide-react";
-import { CartDrawerItem } from ".";
+import { CartDrawerItem } from "..";
 import { getCartItemDetails } from "@/shared/lib";
 
 interface Props {
@@ -28,6 +28,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
+
       <SheetContent className="flex flex-col justify-between pb-0 bg-[#fff0f0]">
         <SheetHeader>
           <SheetTitle>
@@ -42,12 +43,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
               imageUrl={
                 "https://cdn.dodostatic.net/static/Img/Ingredients/000D3A21DA51A81211E9AFA6795BA2A0"
               }
-              details={getCartItemDetails(25, 2, [
-                { name: "Cheese" },
-                { name: "Cucumber" },
-                { name: "Mushrooms" },
-                { name: "Bacon" },
-              ])}
+              details="pizza details"
               name={"Cheese Fresh Crispy Cocktail"}
               price={419}
               quantity={1}

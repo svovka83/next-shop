@@ -1,19 +1,19 @@
 import React from "react";
 import { cn } from "@/shared/lib/utils";
-import { CountIconButton } from ".";
+import { CountIconButton } from "..";
 
 export interface CountButtonProps {
-  value?: number;
+  quantity?: number;
   size?: "sm" | "lg";
-  onClick?: (type: "plus" | "minus") => void;
+  onClick?: (operator: "plus" | "minus") => void;
   className?: string;
 }
 
 export const CountButton: React.FC<CountButtonProps> = ({
-  className,
-  onClick,
-  value = 1,
+  quantity = 1,
   size = "sm",
+  onClick,
+  className,
 }) => {
   return (
     <div
@@ -24,17 +24,17 @@ export const CountButton: React.FC<CountButtonProps> = ({
     >
       <CountIconButton
         onClick={() => onClick?.("minus")}
-        disabled={value === 1}
+        disabled={quantity === 1}
         size={size}
-        type="minus"
+        operator="minus"
       />
 
-      <b className={size === "sm" ? "text-sm" : "text-md"}>{value}</b>
+      <b className={size === "sm" ? "text-sm" : "text-md"}>{quantity}</b>
 
       <CountIconButton
         onClick={() => onClick?.("plus")}
         size={size}
-        type="plus"
+        operator="plus"
       />
     </div>
   );
