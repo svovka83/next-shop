@@ -11,7 +11,7 @@ interface Props {
   className?: string;
 }
 
-export const IngredientItem: React.FC<Props> = ({
+export const Ingredients: React.FC<Props> = ({
   imageUrl,
   name,
   price,

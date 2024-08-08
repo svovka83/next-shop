@@ -1,12 +1,12 @@
 import React from "react";
 import { cn } from "@/shared/lib/utils";
-import { Title } from ".";
-import { Button } from "../ui";
+import { Title } from "..";
+import { Button } from "../../ui";
 
 interface Props {
-  name: string;
   imageUrl: string;
-  onClickAdd?: () => VoidFunction;
+  name: string;
+  onClickAddCart?: () => VoidFunction;
   className?: string;
 }
 
@@ -24,7 +24,7 @@ export const ChooseProductForm: React.FC<Props> = ({
       <div className={cn("relative w-[450px] h-[450px] m-auto", className)}>
         <img
           src={imageUrl}
-          alt="Product image"
+          alt={name}
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 -transition-all duration-300 z-10 w-[300px] h-[300px]"
         />
       </div>

@@ -10,14 +10,14 @@ export type Variant = {
 };
 
 interface Props {
-  itemVariants: readonly Variant[]; // readonly означає, що цей масив не можна змінювати
+  variants: readonly Variant[]; // readonly означає, що цей масив не можна змінювати
   onClick?: (value: Variant["value"]) => void; // функція, яка буде вибирати варіант по його значенню
   selectedValue?: Variant["value"]; // вибраний варіант
   className?: string;
 }
 
 export const GroupVariants: React.FC<Props> = ({
-  itemVariants,
+  variants,
   onClick,
   selectedValue,
   className,
@@ -29,7 +29,7 @@ export const GroupVariants: React.FC<Props> = ({
         className
       )}
     >
-      {itemVariants.map((variant) => (
+      {variants.map((variant) => (
         <button
           key={variant.value}
           onClick={() => onClick?.(variant.value)}

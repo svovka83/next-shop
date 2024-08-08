@@ -3,15 +3,15 @@ import { Header } from "@/shared/components/shared";
 
 export const metadata: Metadata = {
   title: "Food Shop",
-  description: "Cocktail shop for all family",
+  description: "Food shop for all family",
 };
 
 export default function HomeLayout({
-  children,
   modal,
+  children,
 }: Readonly<{
-  children: React.ReactNode;
   modal: React.ReactNode;
+  children: React.ReactNode;
 }>) {
   return (
     <main className="min-h-screen">

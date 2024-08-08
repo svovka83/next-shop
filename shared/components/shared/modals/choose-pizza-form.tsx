@@ -2,59 +2,60 @@
 
 import React from "react";
 import { cn } from "@/shared/lib/utils";
-import { GroupVariants, CocktailImage, Title, IngredientItem } from ".";
-import { Button } from "../ui";
+import { GroupVariants, PizzaImage, Title, Ingredients } from "..";
+import { Button } from "../../ui";
 import {
-  CocktailSizes,
-  CocktailStrengths,
-  cocktailSizes,
+  PizzaSizes,
+  PizzaTypes,
+  pizzaSizes,
+  pizzaTypes,
 } from "@/shared/constants/pizzaTypes";
 import { Ingredient, ProductItem } from "@prisma/client";
-import { getCocktailDetails } from "@/shared/lib";
-import { useCocktailOptions } from "@/shared/hooks";
+import { getPizzaDetails } from "../../functions";
+import { usePizzaOptions } from "@/shared/hooks";
 
 interface Props {
-  name: string;
   imageUrl: string;
+  name: string;
+  variants: ProductItem[];
   ingredients: Ingredient[];
-  items: ProductItem[];
   onClickAddCart?: () => VoidFunction;
   className?: string;
 }
 
-export const ChooseCocktailForm: React.FC<Props> = ({
+export const ChoosePizzaForm: React.FC<Props> = ({
   imageUrl,
   name,
+  variants,
   ingredients,
-  items,
   onClickAddCart,
   className,
 }) => {
   const {
     size,
-    strength,
+    type,
     selectedIngredients,
-    availableStrength,
+    availablePizzaSizes,
     setSize,
-    setStrength,
+    setType,
     addIngredient,
-  } = useCocktailOptions(items);
+  } = usePizzaOptions(variants);
 
-  const { totalPrice, textDetails } = getCocktailDetails(
+  const { totalPrice, textDetails } = getPizzaDetails(
     size,
-    strength,
-    items,
+    type,
+    variants,
     ingredients,
     selectedIngredients
   );
 
-  const handleClickAddCart = () => {
+  const handleClickAdd = () => {
     onClickAddCart?.();
   };
 
   return (
     <div className={cn("flex flex-1", className)}>
-      <CocktailImage
+      <PizzaImage
         className={cn("relative w-[450px] h-[450px] m-auto", className)}
         imageUrl={imageUrl}
         size={size}
@@ -67,27 +68,27 @@ export const ChooseCocktailForm: React.FC<Props> = ({
 
         <div className="my-4">
           <Title
-            text="Choose size and strength"
+            text="Choose size and type of pizza"
             size="xs"
             className="font-bold"
           />
           <GroupVariants
-            items={cocktailSizes}
+            variants={availablePizzaSizes}
             selectedValue={String(size)}
-            onClick={(value) => setSize(Number(value) as CocktailSizes)}
+            onClick={(value) => setSize(Number(value) as PizzaSizes)}
           />
 
           <GroupVariants
-            items={availableStrength} // доступні варіанти strength
-            selectedValue={String(strength)}
-            onClick={(value) => setStrength(Number(value) as CocktailStrengths)}
+            variants={pizzaTypes}
+            selectedValue={String(type)}
+            onClick={(value) => setType(Number(value) as PizzaTypes)}
           />
         </div>
 
         <div className="bg-gray-50 p-5 rounded-md h-[250px] overflow-auto scrollbar">
           <div className="grid grid-cols-3 gap-3">
             {ingredients.map((ingredient) => (
-              <IngredientItem
+              <Ingredients
                 key={ingredient.id}
                 name={ingredient.name}
                 price={ingredient.price}
@@ -100,7 +101,7 @@ export const ChooseCocktailForm: React.FC<Props> = ({
         </div>
 
         <Button
-          onClick={handleClickAddCart}
+          onClick={handleClickAdd}
           className="h-[55px] px-10 mt-8 text-base rounded-[18px] w-full"
         >
           Add to basket for {totalPrice}
