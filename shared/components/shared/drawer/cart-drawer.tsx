@@ -36,7 +36,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
           </SheetTitle>
         </SheetHeader>
 
-        <div className="-mx-6 flex-1 overflow-auto ">
+        <div className="-mx-6 flex-1 overflow-auto">
           <div className="mb-2">
             <CartDrawerItem
               id={0}
@@ -60,11 +60,11 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
               imageUrl={
                 "https://s7d1.scene7.com/is/image/mcdonalds/Best_McChicken-1:nutrition-calculator-tile"
               }
-              details={getCartItemInfo(30, 2, [
-                { id: 1, name: "cheese" },
-                { id: 2, name: "mushrooms" },
-                { id: 3, name: "bacon" },
-                { id: 4, name: "olives" },
+              details={getCartItemInfo(20, 1, [
+                { id: 1, name: "tomato" },
+                { id: 2, name: "peppers" },
+                { id: 3, name: "cucumbers" },
+                { id: 4, name: "onions" },
               ])}
               name="Cheese"
               price={911}

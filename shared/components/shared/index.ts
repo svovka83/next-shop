@@ -1,6 +1,6 @@
 export { Header } from "./header/header";
-export { Container } from "./container";
-export { Title } from "./title";
+export { Container } from "./utils/container";
+export { Title } from "./utils/title";
 export { Categories } from "./top-bar/categories";
 export { SortPopup } from "./top-bar/sort-popup";
 export { TopBar } from "./top-bar/top-bar";
