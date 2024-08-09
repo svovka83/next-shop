@@ -1,20 +1,10 @@
 import { create } from "zustand";
 import { Api } from "../services/api-client";
+import { CartStateItem } from "../functions/formation-cart-details";
 import { formationCartDetails } from "../functions";
 
-export type ICartItem = {
-  id: number;
-  quantity: number;
-  name: string;
-  image: string;
-  price: number;
-  size: number;
-  type: number;
-  ingredients: Array<{ name: string; price: number }>;
-};
-
 export interface CartState {
-  cartItems: ICartItem[];
+  cartItems: CartStateItem[];
   totalAmount: number;
   loading: boolean;
   error: boolean;
@@ -42,7 +32,7 @@ export const useCartStore = create<CartState>((set, get) => ({
     try {
       set({ loading: true, error: false });
       const data = await Api.cart.fetchCart();
-      set(formationCartDetails(data));
+      set(formationCartDetails(data)); // формуємо плоский об'єкт з деталями корзини з отриманого об'єкту
     } catch (error) {
       console.log(error);
       set({ error: true });

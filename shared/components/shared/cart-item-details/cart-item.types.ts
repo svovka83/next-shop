@@ -7,8 +7,3 @@ export interface CartItemProps {
   details: string;
   disabled?: boolean;
 }
-
-export type CartIngredient = {
-  id: number;
-  name: string;
-};

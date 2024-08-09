@@ -1,10 +1,5 @@
-import { Ingredient } from "@prisma/client";
-import {
-  PizzaSizes,
-  PizzaTypes,
-  mapPizzaType,
-} from "../constants/pizzaTypes";
-import { CartIngredient } from "../components/shared/cart-item-details/cart-item.types";
+import { PizzaSizes, PizzaTypes, mapPizzaType } from "../constants/pizzaTypes";
+import { CartStateItem } from "./formation-cart-details";
 
 /**
  * Функція для формування інформації про піцу у вигляді рядка
@@ -18,7 +13,7 @@ import { CartIngredient } from "../components/shared/cart-item-details/cart-item
 export const getCartItemInfo = (
   size: PizzaSizes,
   type: PizzaTypes,
-  ingredients: CartIngredient[]
+  ingredients: CartStateItem["ingredients"]
 ): string => {
   const detailsArray = [];
 
