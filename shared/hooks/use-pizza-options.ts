@@ -3,7 +3,7 @@ import { useSet } from "react-use";
 import { PizzaSizes, PizzaTypes } from "../constants/pizzaTypes";
 import { ProductItem } from "@prisma/client";
 import { Variant } from "../components/shared/pizza-utils/group-variants";
-import { getAvailablePizzaSizes } from "../components/functions";
+import { getAvailablePizzaSizes } from "../functions";
 
 /**
  * Хук для вибору розміру і типу піци, вибору інгредіїнтів та переключення розміру піци при вибраному типі на наступний, якщо він є неактивним

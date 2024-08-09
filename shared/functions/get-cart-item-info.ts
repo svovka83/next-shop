@@ -3,8 +3,8 @@ import {
   PizzaSizes,
   PizzaTypes,
   mapPizzaType,
-} from "../../constants/pizzaTypes";
-import { CartIngredient } from "../shared/cart-item-details/cart-item.types";
+} from "../constants/pizzaTypes";
+import { CartIngredient } from "../components/shared/cart-item-details/cart-item.types";
 
 /**
  * Функція для формування інформації про піцу у вигляді рядка

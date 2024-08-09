@@ -14,7 +14,7 @@ import Link from "next/link";
 import { Button } from "../../ui";
 import { ArrowRight } from "lucide-react";
 import { CartDrawerItem } from "..";
-import { getCartItemInfo } from "../../functions";
+import { getCartItemInfo } from "../../../functions";
 
 interface Props {
   children: React.ReactNode;

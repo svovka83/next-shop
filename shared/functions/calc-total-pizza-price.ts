@@ -1,5 +1,5 @@
 import { Ingredient, ProductItem } from "@prisma/client";
-import { PizzaSizes, PizzaTypes } from "../../constants/pizzaTypes";
+import { PizzaSizes, PizzaTypes } from "../constants/pizzaTypes";
 
 /**
  * Функція загальної вартості піци

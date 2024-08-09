@@ -2,8 +2,10 @@
 
 import * as products from "./products"; // всі функції з файлу 'products.ts' називаємо 'products'
 import * as ingredients from "./ingredients"; // всі функції з файлу 'ingredients.ts' називаємо 'ingredients'
+import * as cart from "./cart";
 
 export const Api = {
   products,
   ingredients,
+  cart,
 };

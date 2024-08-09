@@ -1,6 +1,6 @@
 import { ProductItem } from "@prisma/client";
-import { PizzaTypes, pizzaSizes } from "../../constants/pizzaTypes";
-import { Variant } from "../shared/pizza-utils/group-variants";
+import { PizzaTypes, pizzaSizes } from "../constants/pizzaTypes";
+import { Variant } from "../components/shared/pizza-utils/group-variants";
 
 /**
  * функція отримання доступних розмірів піци за типом

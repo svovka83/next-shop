@@ -8,7 +8,7 @@ import {
   pizzaTypes,
 } from "@/shared/constants/pizzaTypes";
 import { Ingredient, ProductItem } from "@prisma/client";
-import { getPizzaDetails } from "../../functions";
+import { getPizzaDetails } from "../../../functions";
 import { usePizzaOptions } from "@/shared/hooks";
 
 interface Props {
