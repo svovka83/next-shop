@@ -16,3 +16,8 @@ export const updateItemQuantity = async (
   });
   return data;
 };
+
+export const deleteCartItem = async (id: number): Promise<CartDTO> => {
+  const { data } = await axiosInstance.delete<CartDTO>("/cart/" + id);
+  return data;
+};
