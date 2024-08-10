@@ -23,11 +23,7 @@ export const formationCartDetails = (data: CartDTO): ReturnProps => {
     quantity: item.quantity,
     name: item.productItem.product.name,
     imageUrl: item.productItem.product.imageUrl,
-    price: calcCartItemTotalPrice(
-      item.productItem.price,
-      item.quantity,
-      item.ingredients.map((ingredient) => ingredient.price)
-    ),
+    price: calcCartItemTotalPrice(item),
     size: item.productItem.size,
     type: item.productItem.type,
     ingredients: item.ingredients.map((ingredient) => ({

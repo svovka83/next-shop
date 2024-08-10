@@ -8,10 +8,10 @@ export const getCart = async (): Promise<CartDTO> => {
 };
 
 export const updateItemQuantity = async (
-  cartItemId: number,
+  id: number,
   quantity: number
 ): Promise<CartDTO> => {
-  const { data } = await axiosInstance.patch<CartDTO>(`/cart/${cartItemId}`, {
+  const { data } = await axiosInstance.patch<CartDTO>("/cart/" + id, {
     quantity,
   });
   return data;

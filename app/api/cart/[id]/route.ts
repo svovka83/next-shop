@@ -40,7 +40,7 @@ export async function PATCH(
       },
     });
 
-    const updatedUserCart = updateCartTotalAmount(token);
+    const updatedUserCart = await updateCartTotalAmount(token);
 
     return NextResponse.json(updatedUserCart);
   } catch (error) {

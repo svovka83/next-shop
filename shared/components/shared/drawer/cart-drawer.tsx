@@ -45,6 +45,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
   ) => {
     const newQuantity = type === "plus" ? quantity + 1 : quantity - 1;
     updateCartItems(id, newQuantity);
+    console.log(id, quantity, type, newQuantity, totalAmount);
   };
   return (
     <Sheet>
@@ -59,9 +60,8 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
 
         <div className="-mx-6 flex-1 overflow-auto">
           {cartItems.map((item) => (
-            <div className="mb-2">
+            <div className="mb-2" key={item.id}>
               <CartDrawerItem
-                key={item.id}
                 id={item.id}
                 imageUrl={item.imageUrl}
                 details={getCartItemInfo(

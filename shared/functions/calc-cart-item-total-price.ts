@@ -1,21 +1,12 @@
-/**
- * Функція для розрахунку товару в корзині
- *
- * @param variantPrice - ціна варіанту товару
- * @param quantity - кількість
- * @param ingredients - масив інгредіїнтів
- * @returns - number загальна ціна
- */
-export const calcCartItemTotalPrice = (
-  variantPrice: number,
-  quantity: number,
-  ingredients: number[]
-) => {
-  const ingredientsPrice = ingredients.reduce(
-    (acc, ingredientsPrice) => acc + ingredientsPrice,
+import { CartItemDTO } from "../services/dto/cart.dto";
+
+export const calcCartItemTotalPrice = (item: CartItemDTO): number => {
+  const ingredientsPrice = item.ingredients.reduce(
+    (acc, ingredient) => acc + ingredient.price,
     0
   );
-  const totalPrice = (variantPrice + ingredientsPrice) * quantity;
+  const totalPrice =
+    (item.productItem.price + ingredientsPrice) * item.quantity;
 
   return totalPrice;
 };
