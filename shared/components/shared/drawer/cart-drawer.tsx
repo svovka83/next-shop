@@ -26,15 +26,26 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
   children,
   className,
 }) => {
-  const [cartItems, totalAmount, fetchCartItems] = useCartStore((state) => [
-    state.cartItems,
-    state.totalAmount,
-    state.fetchCartItems,
-  ]);
+  const [cartItems, totalAmount, fetchCartItems, updateCartItems] =
+    useCartStore((state) => [
+      state.cartItems,
+      state.totalAmount,
+      state.fetchCartItems,
+      state.updateItemQuantity,
+    ]);
 
   React.useEffect(() => {
     fetchCartItems();
   }, []);
+
+  const onClickCountButton = (
+    id: number,
+    quantity: number,
+    type: "plus" | "minus"
+  ) => {
+    const newQuantity = type === "plus" ? quantity + 1 : quantity - 1;
+    updateCartItems(id, newQuantity);
+  };
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
@@ -42,13 +53,13 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
       <SheetContent className="flex flex-col justify-between pb-0 bg-[#fff0f0]">
         <SheetHeader>
           <SheetTitle>
-            In basket <span>3 goods</span>
+            <span>In basket {cartItems.length} goods</span>
           </SheetTitle>
         </SheetHeader>
 
         <div className="-mx-6 flex-1 overflow-auto">
-          <div className="mb-2">
-            {cartItems.map((item) => (
+          {cartItems.map((item) => (
+            <div className="mb-2">
               <CartDrawerItem
                 key={item.id}
                 id={item.id}
@@ -61,9 +72,12 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
                 name={item.name}
                 price={item.price}
                 quantity={item.quantity}
+                onClickCountButton={(type) =>
+                  onClickCountButton(item.id, item.quantity, type)
+                }
               />
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
         <SheetFooter className="-mx-6 p-8 bg-[#c9c9c9]">
           <div className="w-full">
