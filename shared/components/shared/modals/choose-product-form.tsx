@@ -6,17 +6,16 @@ import { Button } from "../../ui";
 interface Props {
   imageUrl: string;
   name: string;
-  onClickAddCart?: () => VoidFunction;
+  price: number;
+  onSubmit: VoidFunction;
   className?: string;
 }
-
-const textDetails = "something more information about product";
-
-const totalPrice = "100$";
 
 export const ChooseProductForm: React.FC<Props> = ({
   imageUrl,
   name,
+  price,
+  onSubmit,
   className,
 }) => {
   return (
@@ -32,10 +31,11 @@ export const ChooseProductForm: React.FC<Props> = ({
       <div className="w-[450px] bg-[#F5F5F5] p-7">
         <Title text={name} size="md" className="mb-1 font-extrabold" />
 
-        <p className="text-gray-400">{textDetails}</p>
-
-        <Button className="h-[55px] px-10 mt-8 text-base rounded-[18px] w-full">
-          Add to basket for {totalPrice}
+        <Button
+          onClick={onSubmit}
+          className="h-[55px] px-10 mt-8 text-base rounded-[18px] w-full"
+        >
+          Add to basket for {price} ₴
         </Button>
       </div>
     </div>

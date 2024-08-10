@@ -1,6 +1,7 @@
 export enum ApiRoutes {
   SEARCH_PRODUCTS = "/products/search",
   INGREDIENTS = "/ingredients",
-  CART = "/cart",
+  GET_CART = "/cart",
+  POST_CART = "/cart",
   // PATCH_CART = `/cart/${id}`,
 }

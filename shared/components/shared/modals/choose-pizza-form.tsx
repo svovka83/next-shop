@@ -16,7 +16,7 @@ interface Props {
   name: string;
   variants: ProductItem[];
   ingredients: Ingredient[];
-  onClickAddCart?: () => VoidFunction;
+  onSubmit: (variantId: number, ingredients: number[]) => void;
   className?: string;
 }
 
@@ -25,7 +25,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
   name,
   variants,
   ingredients,
-  onClickAddCart,
+  onSubmit,
   className,
 }) => {
   const {
@@ -33,6 +33,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
     type,
     selectedIngredients,
     availablePizzaSizes,
+    currentVariantId,
     setSize,
     setType,
     addIngredient,
@@ -45,10 +46,6 @@ export const ChoosePizzaForm: React.FC<Props> = ({
     ingredients,
     selectedIngredients
   );
-
-  const handleClickAdd = () => {
-    onClickAddCart?.();
-  };
 
   return (
     <div className={cn("flex flex-1", className)}>
@@ -98,7 +95,11 @@ export const ChoosePizzaForm: React.FC<Props> = ({
         </div>
 
         <Button
-          onClick={handleClickAdd}
+          onClick={() => {
+            if (currentVariantId) {
+              onSubmit(currentVariantId, Array.from(selectedIngredients));
+            }
+          }}
           className="h-[55px] px-10 mt-8 text-base rounded-[18px] w-full"
         >
           Add to basket for {totalPrice}
