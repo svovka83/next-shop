@@ -38,7 +38,7 @@ export const Header: React.FC<Props> = ({ className }) => {
         </div>
 
         {/* Right size */}
-        <div className="flex items-center gap-4">
+        <div className="grid grid-cols-2 items-center gap-4">
           <Button variant="outline" className="flex items-center gap-1">
             <User size="16px" /> Enter
           </Button>

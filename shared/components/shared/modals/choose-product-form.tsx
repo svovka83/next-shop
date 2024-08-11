@@ -2,12 +2,14 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { Title } from "..";
 import { Button } from "../../ui";
+import { ProductItem } from "@prisma/client";
 
 interface Props {
   imageUrl: string;
   name: string;
   price: number;
   onSubmit: VoidFunction;
+  loading?: boolean;
   className?: string;
 }
 
@@ -16,6 +18,7 @@ export const ChooseProductForm: React.FC<Props> = ({
   name,
   price,
   onSubmit,
+  loading,
   className,
 }) => {
   return (
@@ -32,6 +35,7 @@ export const ChooseProductForm: React.FC<Props> = ({
         <Title text={name} size="md" className="mb-1 font-extrabold" />
 
         <Button
+          loading={loading}
           onClick={onSubmit}
           className="h-[55px] px-10 mt-8 text-base rounded-[18px] w-full"
         >

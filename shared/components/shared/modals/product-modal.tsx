@@ -15,9 +15,12 @@ interface Props {
 }
 
 export const ProductModal: React.FC<Props> = ({ product, className }) => {
-  const addCartItem = useCartStore((state) => state.addCartItem);
-  const firstItem = product.variants[0];
   const router = useRouter();
+  const [addCartItem, loading] = useCartStore((state) => [
+    state.addCartItem,
+    state.loading,
+  ]);
+  const firstItem = product.variants[0];
   const isPizzaForm = Boolean(firstItem.type);
 
   const onAddPizza = async (productItemId: number, ingredients: number[]) => {
@@ -26,19 +29,25 @@ export const ProductModal: React.FC<Props> = ({ product, className }) => {
         productItemId,
         ingredients,
       });
-      toast.success("Pizza added to cart");
+      toast.success("Pizza added to your cart", { duration: 4000 });
       router.back();
     } catch (err) {
-      toast.error("Can't add pizza to cart");
+      toast.error("Can't add pizza to your cart");
       console.error(err);
     }
   };
   const onAddProduct = () => {
-    addCartItem({
-      productItemId: firstItem.id,
-      ingredients: [],
-    });
-    router.back();
+    try {
+      addCartItem({
+        productItemId: firstItem.id,
+        ingredients: [],
+      });
+      toast.success(product.name + " added to your cart", { duration: 4000 });
+      router.back();
+    } catch (err) {
+      toast.error("Can't add product to your cart");
+      console.error(err);
+    }
   };
 
   return (
@@ -57,6 +66,7 @@ export const ProductModal: React.FC<Props> = ({ product, className }) => {
             variants={product.variants}
             ingredients={product.ingredients}
             onSubmit={onAddPizza}
+            loading={loading}
           />
         ) : (
           <ChooseProductForm
@@ -64,6 +74,7 @@ export const ProductModal: React.FC<Props> = ({ product, className }) => {
             name={product.name}
             price={firstItem.price}
             onSubmit={onAddProduct}
+            loading={loading}
           />
         )}
       </DialogContent>

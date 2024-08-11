@@ -6,3 +6,4 @@ export { formationCartDetails } from "./formation-cart-details";
 export { calcCartItemTotalPrice } from "./calc-cart-item-total-price";
 export { updateCartTotalAmount } from "./update-cart-total-amount";
 export { findOrCreateCart } from "./find-or-create-cart";
+export { findPizzas } from "./find-pizzas";
