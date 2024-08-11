@@ -51,11 +51,14 @@ export const ChoosePizzaForm: React.FC<Props> = ({
 
   return (
     <div className={cn("flex flex-1", className)}>
-      <PizzaImage
-        className={cn("relative w-[450px] h-[450px] m-auto", className)}
-        imageUrl={imageUrl}
-        size={size}
-      />
+      {/* доробити коли в типі немає розмір, щоб картинка не відображалась*/}
+      {size && type && (
+        <PizzaImage
+          className={cn("relative w-[450px] h-[450px] m-auto", className)}
+          imageUrl={imageUrl}
+          size={size}
+        />
+      )}
 
       <div className="bg-[#F5F5F5] p-7">
         <Title text={name} size="md" className="mb-1 font-extrabold" />

@@ -9,7 +9,11 @@ import { Suspense } from "react";
 import { findPizzas } from "@/shared/functions";
 import { GetSearchParams } from "@/shared/functions/find-pizzas";
 
-export default async function Home( { searchParams }: { searchParams: GetSearchParams }) {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: GetSearchParams;
+}) {
   const catagories = await findPizzas(searchParams);
 
   return (
@@ -21,7 +25,11 @@ export default async function Home( { searchParams }: { searchParams: GetSearchP
           className="font-extrabold pl-10"
         />
       </Container>
-      <TopBar categories={catagories.filter((c) => c.products.length > 0)} />
+      <TopBar
+        categories={catagories.filter(
+          (category) => category.products.length > 0
+        )}
+      />
       <Container className="mt-8 pb-14 ">
         <div className="flex gap-[60px]">
           {/* filtration */}

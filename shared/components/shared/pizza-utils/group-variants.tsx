@@ -38,7 +38,6 @@ export const GroupVariants: React.FC<Props> = ({
             {
               "bg-white shadow": selectedValue === variant.value,
               "text-gray-500 opacity-50 pointer-events-none": variant.disabled,
-              "bg-black/0": Boolean(selectedValue) === variant.disabled,
             }
           )}
         >

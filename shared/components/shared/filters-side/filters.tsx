@@ -73,7 +73,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
             type="number"
             placeholder="0"
             min={0}
-            max={100}
+            max={1000}
             value={String(filters.prices.priceFrom)}
             onChange={(event) =>
               filters.setPrices("priceFrom", Number(event.target.value))
@@ -83,7 +83,7 @@ export const Filters: React.FC<Props> = ({ className }) => {
             type="number"
             placeholder="1000"
             min={10}
-            max={100}
+            max={1000}
             value={String(filters.prices.priceTo)}
             onChange={(event) =>
               filters.setPrices("priceTo", Number(event.target.value))

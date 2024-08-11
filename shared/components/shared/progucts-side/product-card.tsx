@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -9,6 +11,7 @@ interface Props {
   id: number;
   name: string;
   price: number;
+  ingredients: Array<{ name: string; price: number }>;
   imageUrl: string;
   className?: string;
 }
@@ -17,13 +20,19 @@ export const ProductCard: React.FC<Props> = ({
   id,
   name,
   price,
+  ingredients,
   imageUrl,
   className,
 }) => {
   return (
-    <div className={cn("w-[260px] rounded-2xl shadow bg-secondary hover:shadow-2xl hover:-translate-y-2 duration-300 mx-auto", className)}>
+    <div
+      className={cn(
+        "w-[260px] rounded-2xl shadow bg-secondary hover:shadow-2xl hover:-translate-y-2 duration-300 mx-auto",
+        className
+      )}
+    >
       <Link href={`/product/${id}`}>
-        <div className="flex flex-col p-[25px]" >
+        <div className="flex flex-col p-[25px]">
           <img
             className="w-[210px] h-[210px] bg-white rounded-2xl p-8"
             src={imageUrl}
@@ -32,8 +41,12 @@ export const ProductCard: React.FC<Props> = ({
 
           <Title text={name} size="sm" className="mb-1 mt-2 font-bold" />
 
-          <p className="text-sm text-gray-400">
-            Here must be list of ingredients...
+          <p className="flex flex-wrap text-sm text-gray-400">
+            {ingredients.map((ingredient, index) => (
+              <span key={index}>
+                {ingredient.name}{","}
+              </span>
+            ))}
           </p>
 
           <div className="flex justify-between items-center mt-4">

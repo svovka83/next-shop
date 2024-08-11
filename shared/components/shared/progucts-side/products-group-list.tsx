@@ -5,10 +5,11 @@ import { cn } from "@/lib/utils";
 import { useIntersection } from "react-use";
 import { ProductCard, Title } from "..";
 import { useCategoryStore } from "@/shared/store/category";
+import { ProductWithRelations } from "@/@types/prisma";
 
 export interface Props {
   title: string;
-  itemProducts: any[]; // список продуктів в категорії
+  itemProducts: ProductWithRelations[];
   categoryId: number;
   className?: string;
   listClassName?: string;
@@ -24,7 +25,7 @@ export const ProductsGroupList: React.FC<Props> = ({
   const setActiveCategoryId = useCategoryStore((state) => state.setActiveId);
   const intersectionRef = React.useRef(null); 
   const intersection = useIntersection(intersectionRef, {
-    threshold: 0.4,
+    threshold: 0.3,
   }); // хук для перевірки чи є елемент в зоні видимості
 
   React.useEffect(() => {
@@ -44,7 +45,8 @@ export const ProductsGroupList: React.FC<Props> = ({
             id={product.id}
             name={product.name}
             imageUrl={product.imageUrl}
-            price={product.variants[0]?.price} // ціна продукту першої варіації продукту
+            price={product.variants[0].price} // ціна продукту першої варіації продукту
+            ingredients={product.ingredients}
           />
         ))}
       </div>
