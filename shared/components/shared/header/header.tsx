@@ -1,24 +1,29 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-
 import { CartButton, Container, SearchInput } from "..";
 import { Button } from "../../ui";
 import { User } from "lucide-react";
 
 interface Props {
+  hasSearch?: boolean;
+  hasCart?: boolean;
   className?: string;
 }
 
-export const Header: React.FC<Props> = ({ className }) => {
+export const Header: React.FC<Props> = ({
+  hasSearch = true,
+  hasCart = true,
+  className,
+}) => {
   return (
-    <header className={cn("border border-b", className)}>
+    <header className={cn("border-b", className)}>
       <Container className="flex items-center justify-between py-8 px-4">
         {/* Left size */}
         <Link href="/">
           <div className="flex items-center gap-4">
             <img
-              src="https://s7d1.scene7.com/is/image/mcdonalds/Best_McChicken-1:nutrition-calculator-tile"
+              src="https://cdn.dodostatic.net/static/Img/Ingredients/000D3A39D824A82E11E9AFA5B328D35A"
               alt="Logo"
               width={50}
               height={50}
@@ -26,23 +31,25 @@ export const Header: React.FC<Props> = ({ className }) => {
             <div>
               <h1 className="text-2xl uppercase font-black">Food shop</h1>
               <p className="text-base text-gray-400 leading-3">
-              the most delicious
+                the most delicious
               </p>
             </div>
           </div>
         </Link>
 
         {/* Search input area */}
-        <div className="mx-10 flex-1">
-          <SearchInput />
-        </div>
+        {hasSearch && (
+          <div className="mx-10 flex-1">
+            <SearchInput />
+          </div>
+        )}
 
         {/* Right size */}
-        <div className="grid grid-cols-2 items-center gap-4">
+        <div className="flex items-center gap-4">
           <Button variant="outline" className="flex items-center gap-1">
             <User size="16px" /> Enter
           </Button>
-          <CartButton />
+          {hasCart && <CartButton />}
         </div>
       </Container>
     </header>

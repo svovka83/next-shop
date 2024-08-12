@@ -23,7 +23,7 @@ export const CartButton: React.FC<Props> = ({ className }) => {
       <Button
         loading={loading}
         variant="default"
-        className={cn("group relative", { "w-[131px]": loading }, className)}
+        className={cn("group relative", { "w-[107px]": loading }, className)}
       >
         <b>{totalAmount} $</b>
         <span className="h-full w-[1px] bg-white/30 mx-3" />
