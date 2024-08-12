@@ -17,12 +17,19 @@ export const CartDrawerItem: React.FC<Props> = ({
   price,
   quantity,
   details,
+  disabled,
   onClickCountButton,
   onClickRemove,
   className,
 }) => {
   return (
-    <div className={cn("flex bg-white p-5 gap-6", className)}>
+    <div
+      className={cn(
+        "flex bg-white p-5 gap-6",
+        { "opacity-50 pointer-events-none": disabled }, // pointer-events-none - заблокувати натискання
+        className
+      )}
+    >
       <CartItem.Image imageUrl={imageUrl} />
 
       <div className="flex-1">
@@ -31,7 +38,10 @@ export const CartDrawerItem: React.FC<Props> = ({
         <hr className="my-3" />
 
         <div className="flex items-center justify-between">
-          <CartItem.Button quantity={quantity} onClickCountButton={onClickCountButton} />
+          <CartItem.Button
+            quantity={quantity}
+            onClickCountButton={onClickCountButton}
+          />
 
           <div className="flex items-center gap-3">
             <CartItem.Price price={price} />

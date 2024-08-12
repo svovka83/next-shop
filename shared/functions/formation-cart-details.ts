@@ -10,6 +10,7 @@ export type CartStateItem = {
   size: number | null;
   type: number | null;
   ingredients: Array<{ name: string; price: number }>;
+  disabled?: boolean;
 };
 
 interface ReturnProps {
@@ -30,6 +31,7 @@ export const formationCartDetails = (data: CartDTO): ReturnProps => {
       name: ingredient.name,
       price: ingredient.price,
     })),
+    disabled: false,
   }));
 
   return {
