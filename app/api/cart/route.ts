@@ -60,13 +60,13 @@ export async function POST(req: NextRequest) {
         ingredients: {
           every: {
             id: {
-              in: data.ingredients,
+              in: data.ingredients, // попробувати розібратись
             },
           },
         },
       },
     });
-
+    console.log(data.ingredients);
     // якщо є, то збільшуємо кількість на 1
     if (findCartItem) {
       await prisma.cartItem.update({
