@@ -15,7 +15,6 @@ export const useQueryFilters = (filters: Filters) => {
       sizes: Array.from(filters.sizes),
       ingredients: Array.from(filters.selectedIngredients),
     };
-    console.log("useQueryFilters");
 
     const query = qs.stringify(params, {
       // формуємо рядкову строку із значень фільтрів
