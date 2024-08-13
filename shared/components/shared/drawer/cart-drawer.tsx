@@ -16,35 +16,18 @@ import { Button } from "../../ui";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { CartDrawerItem, Title } from "..";
 import { getCartItemInfo } from "../../../functions";
-import { useCartStore } from "@/shared/store";
 import { PizzaSizes, PizzaTypes } from "@/shared/constants/pizzaTypes";
+import { useCart } from "@/shared/hooks";
 
 interface Props {
   children: React.ReactNode;
-  className?: string;
 }
 
 export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
   children,
-  className,
 }) => {
-  const [
-    cartItems,
-    totalAmount,
-    fetchCartItems,
-    updateItemQuantity,
-    removeCartItem,
-  ] = useCartStore((state) => [
-    state.cartItems,
-    state.totalAmount,
-    state.fetchCartItems,
-    state.updateItemQuantity,
-    state.removeItem,
-  ]);
-
-  React.useEffect(() => {
-    fetchCartItems();
-  }, []);
+  const { cartItems, totalAmount, updateItemQuantity, removeCartItem } =
+    useCart();
 
   const onClickCountButton = (
     id: number,
@@ -127,10 +110,10 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
                   </span>
                   <span className="font-bold text-lg">{totalAmount} $</span>
                 </div>
-                <Link href="/cart">
-                  <Button type="submit" className="w-full h-12 text-base">
+                <Link href="/checkout">
+                  <Button type="submit" className="w-full h-12 text-base group">
                     <b>Make order</b>
-                    <ArrowRight className="w-5 ml-2" />
+                    <ArrowRight className="w-5 ml-2 group-hover:translate-x-2 transition" />
                   </Button>
                 </Link>
               </div>
