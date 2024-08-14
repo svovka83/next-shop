@@ -30,7 +30,6 @@ export const FormInput: React.FC<Props> = ({
 
   const onClickClear = () => setValue(name, "", { shouldValidate: true }); // shouldValidate: true - при очистці поля виклиє валідацію
 
-  console.log(value, errorText);
   return (
     <div className={className}>
       {label && (
@@ -44,7 +43,7 @@ export const FormInput: React.FC<Props> = ({
         {value && <ClearButton clearInput={onClickClear} className="top-1/2" />}
       </div>
 
-      {errorText && <ErrorText text={errorText} className="mt-2" />}
+      {errorText && <ErrorText text={errorText} />}
     </div>
   );
 };

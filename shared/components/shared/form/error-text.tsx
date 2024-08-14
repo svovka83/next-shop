@@ -8,6 +8,6 @@ interface Props {
 
 export const ErrorText: React.FC<Props> = ({ text, className }) => {
   return (
-    <div className={cn("text-red-500 text-sm", className)}>{text}</div>
+    <div className={cn("text-red-500 text-sm mt-2", className)}>{text}</div>
   );
 };

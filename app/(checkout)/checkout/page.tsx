@@ -70,6 +70,7 @@ export default function Checkout() {
                 <RightCheckoutSide
                   cartItems={cartItems}
                   totalAmount={totalAmount}
+                  loading={loading}
                 />
               </div>
             </div>

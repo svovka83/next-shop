@@ -3,8 +3,8 @@ import { ClearButton, ErrorText, RequiredSymbol } from "..";
 import { Textarea } from "../../ui";
 import { useFormContext } from "react-hook-form";
 
-interface Props extends React.InputHTMLAttributes<HTMLTextAreaElement> {
-  // наслідуємо властивості HTMLInputElement - базовий інтерфейс HTML інпута
+interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  // наслідуємо властивості HTMLTextAreaElement - базовий інтерфейс HTML текстерія
   name: string;
   label?: string;
   required?: boolean;
@@ -30,7 +30,6 @@ export const FormTextarea: React.FC<Props> = ({
 
   const onClickClear = () => setValue(name, "", { shouldValidate: true }); // shouldValidate: true - при очистці поля виклиє валідацію
 
-  console.log(value, errorText);
   return (
     <div className={className}>
       {label && (
@@ -45,7 +44,7 @@ export const FormTextarea: React.FC<Props> = ({
         {value && <ClearButton clearInput={onClickClear} className="top-6" />}
       </div>
 
-      {errorText && <ErrorText text={errorText} className="mt-2" />}
+      {errorText && <ErrorText text={errorText} />}
     </div>
   );
 };

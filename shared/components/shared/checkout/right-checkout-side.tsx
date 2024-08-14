@@ -1,18 +1,20 @@
 import React from "react";
 import { CheckoutLineInfo, WhiteBlock } from "..";
 import { ArrowRight, Package, Percent, Truck } from "lucide-react";
-import { Button } from "../../ui";
+import { Button, Skeleton } from "../../ui";
 import { CartStateItem } from "@/shared/functions/formation-cart-details";
 
 interface Props {
   cartItems: CartStateItem[];
   totalAmount: number;
+  loading?: boolean;
   className?: string;
 }
 
 export const RightCheckoutSide: React.FC<Props> = ({
   cartItems,
   totalAmount,
+  loading,
 }) => {
   const DELIVERY_PRICE = 100;
   const TAX_PERCENT = 15;
@@ -30,9 +32,13 @@ export const RightCheckoutSide: React.FC<Props> = ({
     <WhiteBlock className="sticky top-4 p-6">
       <div className="flex flex-col gap-1 mb-4">
         <span className="text-xl">Total price:</span>
-        <span className="text-[34px] font-extrabold">
-          {cartItems.length > 0 ? TOTAL_PRICE : 0} $
-        </span>
+        {loading ? (
+          <Skeleton className="w-[180px] h-[51px] rounded-3xl" />
+        ) : (
+          <span className="text-[34px] font-extrabold">
+            {cartItems.length > 0 ? TOTAL_PRICE : 0} $
+          </span>
+        )}
       </div>
       <div className="border-t border-gray-100 py-3">
         <CheckoutLineInfo
@@ -43,6 +49,7 @@ export const RightCheckoutSide: React.FC<Props> = ({
             </div>
           }
           price={totalAmount}
+          loading={loading}
         />
         <CheckoutLineInfo
           titleInfo={
@@ -52,6 +59,7 @@ export const RightCheckoutSide: React.FC<Props> = ({
             </div>
           }
           price={TAX_COUNT}
+          loading={loading}
         />
         <CheckoutLineInfo
           titleInfo={
@@ -61,6 +69,7 @@ export const RightCheckoutSide: React.FC<Props> = ({
             </div>
           }
           price={cartItems.length > 0 ? DELIVERY_COUNT : 0}
+          loading={loading}
         />
       </div>
 

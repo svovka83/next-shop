@@ -21,6 +21,7 @@ export const CheckoutPersonalForm: React.FC<Props> = ({ className }) => {
         />
         <FormInput name="email" className="text-base" placeholder="Email" />
         <FormInput name="phone" className="text-base" placeholder="Phone" />
+        {/* бібліотека react-imask - для форматування номера (тут не використовується, можна в майбутньому додати ) */}
       </div>
     </WhiteBlock>
   );
