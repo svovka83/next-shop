@@ -2,16 +2,24 @@ import React from "react";
 import { ErrorText, FormInput, FormTextarea, WhiteBlock } from "..";
 import { AddressInput } from "../form/address-input";
 import { Controller, useFormContext } from "react-hook-form";
+import { cn } from "@/lib/utils";
 
 interface Props {
+  loading?: boolean;
   className?: string;
 }
 
-export const CheckoutAddressForm: React.FC<Props> = () => {
+export const CheckoutAddressForm: React.FC<Props> = ({
+  loading,
+  className,
+}) => {
   const { control } = useFormContext();
 
   return (
-    <WhiteBlock title="3. Delivery address">
+    <WhiteBlock
+      title="3. Delivery address"
+      className={cn("", loading && className)}
+    >
       <div className="flex flex-col gap-5">
         <FormInput
           name="address"

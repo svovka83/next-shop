@@ -58,11 +58,18 @@ export default function Checkout() {
                   cartItems={cartItems}
                   updateItemQuantity={updateItemQuantity}
                   removeCartItem={removeCartItem}
+                  loading={loading}
                 />
 
-                <CheckoutPersonalForm />
+                <CheckoutPersonalForm
+                  loading={loading}
+                  className="opacity-45 pointer-events-none"
+                />
 
-                <CheckoutAddressForm />
+                <CheckoutAddressForm
+                  loading={loading}
+                  className="opacity-45 pointer-events-none"
+                />
               </div>
 
               {/* Right side block of checkout  */}

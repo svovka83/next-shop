@@ -26,7 +26,7 @@ export const CartCheckoutItem: React.FC<Props> = ({
     <div
       className={cn(
         "flex items-center justify-between",
-        { "opacity-50 pointer-events-none": disabled },
+        { "opacity-50 pointer-events-none": disabled }, // check this disabled if need here it ???
         className
       )}
     >

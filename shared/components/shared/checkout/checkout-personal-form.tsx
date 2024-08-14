@@ -1,13 +1,21 @@
 import React from "react";
+import { cn } from "@/lib/utils";
 import { FormInput, WhiteBlock } from "..";
 
 interface Props {
+  loading?: boolean;
   className?: string;
 }
 
-export const CheckoutPersonalForm: React.FC<Props> = ({ className }) => {
+export const CheckoutPersonalForm: React.FC<Props> = ({
+  loading,
+  className,
+}) => {
   return (
-    <WhiteBlock title="2. Personal information" className={className}>
+    <WhiteBlock
+      title="2. Personal information"
+      className={cn("", loading && className)}
+    >
       <div className="grid grid-cols-2 gap-4">
         <FormInput
           name="firstName"
