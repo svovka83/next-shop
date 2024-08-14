@@ -1,5 +1,4 @@
 import React from "react";
-import { cn } from "@/lib/utils";
 import { CheckoutLineInfo, WhiteBlock } from "..";
 import { ArrowRight, Package, Percent, Truck } from "lucide-react";
 import { Button } from "../../ui";
@@ -14,7 +13,6 @@ interface Props {
 export const RightCheckoutSide: React.FC<Props> = ({
   cartItems,
   totalAmount,
-  className,
 }) => {
   const DELIVERY_PRICE = 100;
   const TAX_PERCENT = 15;
@@ -32,7 +30,9 @@ export const RightCheckoutSide: React.FC<Props> = ({
     <WhiteBlock className="sticky top-4 p-6">
       <div className="flex flex-col gap-1 mb-4">
         <span className="text-xl">Total price:</span>
-        <span className="text-[34px] font-extrabold">{TOTAL_PRICE} $</span>
+        <span className="text-[34px] font-extrabold">
+          {cartItems.length > 0 ? TOTAL_PRICE : 0} $
+        </span>
       </div>
       <div className="border-t border-gray-100 py-3">
         <CheckoutLineInfo
@@ -60,11 +60,11 @@ export const RightCheckoutSide: React.FC<Props> = ({
               Delivery:
             </div>
           }
-          price={DELIVERY_COUNT}
+          price={cartItems.length > 0 ? DELIVERY_COUNT : 0}
         />
       </div>
 
-      <Button className="w-full text-[18px] group" size="lg">
+      <Button type="submit" className="w-full text-[18px] group" size="lg">
         Go to payment
         <ArrowRight
           size="20px"

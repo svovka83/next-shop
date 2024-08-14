@@ -18,3 +18,5 @@ export const checkoutFormSchema = z.object({
     .min(5, { message: "Address must be at least 10 characters long" }),
   comment: z.string().optional(),
 });
+
+export type CheckoutFormValues = z.infer<typeof checkoutFormSchema>;

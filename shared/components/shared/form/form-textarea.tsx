@@ -1,9 +1,9 @@
 import React from "react";
 import { ClearButton, ErrorText, RequiredSymbol } from "..";
-import { Input } from "../../ui";
+import { Textarea } from "../../ui";
 import { useFormContext } from "react-hook-form";
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+interface Props extends React.InputHTMLAttributes<HTMLTextAreaElement> {
   // наслідуємо властивості HTMLInputElement - базовий інтерфейс HTML інпута
   name: string;
   label?: string;
@@ -11,7 +11,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string;
 }
 
-export const FormInput: React.FC<Props> = ({
+export const FormTextarea: React.FC<Props> = ({
   name,
   label,
   required,
@@ -40,8 +40,9 @@ export const FormInput: React.FC<Props> = ({
       )}
 
       <div className="relative">
-        <Input className="h-12 text-md" {...register(name)} {...props} />
-        {value && <ClearButton clearInput={onClickClear} className="top-1/2" />}
+        <Textarea className="h-12 text-md" {...register(name)} {...props} />
+
+        {value && <ClearButton clearInput={onClickClear} className="top-6" />}
       </div>
 
       {errorText && <ErrorText text={errorText} className="mt-2" />}

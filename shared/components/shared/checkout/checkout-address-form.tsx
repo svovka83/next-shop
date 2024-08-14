@@ -1,5 +1,5 @@
 import React from "react";
-import { WhiteBlock } from "..";
+import { FormInput, FormTextarea, WhiteBlock } from "..";
 import { Input, Textarea } from "../../ui";
 
 interface Props {
@@ -10,14 +10,15 @@ export const CheckoutAddressForm: React.FC<Props> = () => {
   return (
     <WhiteBlock title="3. Delivery address">
       <div className="flex flex-col gap-5">
-        <Input
+        <FormInput
           name="address"
           className="text-base"
           placeholder="...input address delivery"
         />
-        <Textarea
+        <FormTextarea
+          name="comment"
           className="text-base"
-          rows={5}
+          aria-rowspan={10}
           placeholder="Comment for order"
         />
       </div>
