@@ -54,7 +54,8 @@ export default function Checkout() {
       });
 
       if (url) {
-        location.href = url;
+        // location.href = url;
+        alert("url payment");
       }
     } catch (error) {
       console.log(error);

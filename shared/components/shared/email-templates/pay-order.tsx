@@ -12,10 +12,10 @@ export const PayOrder: React.FC<Props> = ({
   paymentUrl,
 }) => (
   <div>
-    <h1>Order #{orderId}</h1>
+    <h1>Order # {orderId}</h1>
 
     <p>
-      Pay for the order {totalAmount} $. Follow
+      Pay for the order {totalAmount} $. Follow{" "}
       <a href={paymentUrl}>this link</a> to pay.
     </p>
   </div>
