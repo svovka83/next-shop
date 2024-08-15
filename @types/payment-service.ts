@@ -1,10 +1,8 @@
-export interface PaymentTestData {
-  description: string;
-}
+import { OrderStatus } from "@prisma/client";
 
 export interface PaymentData {
   id: string;
-  status: string;
+  status: OrderStatus;
   amount: Amount;
   description: string;
   recipient: Recipient;

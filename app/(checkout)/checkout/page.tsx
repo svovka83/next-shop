@@ -44,6 +44,7 @@ export default function Checkout() {
 
   const onSubmit = async (data: CheckoutFormValues) => {
     try {
+      if (!window.confirm(`Please confirm payment ${totalAmount}`)) return;
       setSubmitting(true);
 
       const url = await createOrder(data);
@@ -54,8 +55,7 @@ export default function Checkout() {
       });
 
       if (url) {
-        // location.href = url;
-        alert("url payment");
+        location.href = url;
       }
     } catch (error) {
       console.log(error);
