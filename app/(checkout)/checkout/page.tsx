@@ -16,8 +16,12 @@ import {
   Title,
 } from "@/shared/components/shared";
 import { useCart } from "@/shared/hooks";
+import { createOrder } from "@/app/actions";
+import toast from "react-hot-toast";
 
 export default function Checkout() {
+  const [submitting, setSubmitting] = React.useState(false);
+
   const {
     cartItems,
     updateItemQuantity,
@@ -38,8 +42,25 @@ export default function Checkout() {
     },
   });
 
-  const onSubmit = (data: CheckoutFormValues) => {
-    console.log(data);
+  const onSubmit = async (data: CheckoutFormValues) => {
+    try {
+      setSubmitting(true);
+
+      const url = await createOrder(data);
+
+      toast.success("Order created successfully. Redirect to payment...", {
+        duration: 4000,
+        icon: "✅",
+      });
+
+      if (url) {
+        location.href = url;
+      }
+    } catch (error) {
+      console.log(error);
+      setSubmitting(false);
+      toast.error("Something went wrong", { duration: 4000, icon: "❌" });
+    }
   };
 
   return (
@@ -77,7 +98,7 @@ export default function Checkout() {
                 <RightCheckoutSide
                   cartItems={cartItems}
                   totalAmount={totalAmount}
-                  loading={loading}
+                  loading={loading || submitting}
                 />
               </div>
             </div>

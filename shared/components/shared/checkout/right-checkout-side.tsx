@@ -73,7 +73,7 @@ export const RightCheckoutSide: React.FC<Props> = ({
         />
       </div>
 
-      <Button type="submit" className="w-full text-[18px] group" size="lg">
+      <Button loading={loading} type="submit" className="w-full text-[18px] group" size="lg">
         Go to payment
         <ArrowRight
           size="20px"

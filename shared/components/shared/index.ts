@@ -35,3 +35,4 @@ export { CheckoutCart } from "./checkout/checkout-cart";
 export { CheckoutPersonalForm } from "./checkout/checkout-personal-form";
 export { CheckoutAddressForm } from "./checkout/checkout-address-form";
 export { FormTextarea } from "./form/form-textarea";
+export { PayOrder } from "./email-templates/pay-order";

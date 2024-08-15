@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
         },
       },
     });
-    console.log(data.ingredients);
+
     // якщо є, то збільшуємо кількість на 1
     if (findCartItem) {
       await prisma.cartItem.update({
