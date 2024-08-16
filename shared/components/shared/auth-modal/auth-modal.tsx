@@ -2,6 +2,7 @@ import React from "react";
 import { Dialog, DialogContent } from "../../ui/dialog";
 import { Button } from "../../ui";
 import { signIn, useSession } from "next-auth/react";
+import { LoginForm } from "./login-form";
 
 interface Props {
   open: boolean;
@@ -9,6 +10,12 @@ interface Props {
 }
 
 export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
+  const [type, setType] = React.useState<"login" | "register">("login"); // відображаємо форму входу чи реєстрації
+
+  const onSwitchType = () => {
+    setType(type === "login" ? "register" : "login");
+  };
+
   const { data: session } = useSession();
 
   const handleClosed = () => {
@@ -18,7 +25,12 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
   return (
     <Dialog open={open} onOpenChange={handleClosed}>
       <DialogContent className="w-[450px] bg-white">
-        FORM
+        {type === "login" ? (
+          <LoginForm onClose={handleClosed} />
+        ) : (
+          <h1 className="text-2xl">REGISTER</h1>
+        )}
+
         <hr />
         <div className="flex gap-2">
           <Button
@@ -50,6 +62,14 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
             Google
           </Button>
         </div>
+        <Button
+          variant="outline"
+          type="button"
+          className="h-12"
+          onClick={onSwitchType}
+        >
+          {type === "login" ? "REGISTER" : "login"}
+        </Button>
       </DialogContent>
     </Dialog>
   );
