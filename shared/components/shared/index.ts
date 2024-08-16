@@ -38,3 +38,5 @@ export { FormTextarea } from "./form/form-textarea";
 export { PayOrder } from "./email-templates/pay-order";
 export { ProfileButton } from "./header/profile-button";
 export { AuthModal } from "./auth-modal/auth-modal";
+export { LoginForm } from "./auth-modal/login-form";
+export { RegisterForm } from "./auth-modal/register-form";

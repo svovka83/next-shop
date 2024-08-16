@@ -24,7 +24,7 @@ export const Header: React.FC<Props> = ({
   hasCart = true,
   className,
 }) => {
-  const [open, setOpen] = React.useState(false);
+  const [openAuthModal, setOpenAuthModal] = React.useState(false);
 
   const searchParams = useSearchParams();
 
@@ -69,9 +69,9 @@ export const Header: React.FC<Props> = ({
 
         {/* Right size */}
         <div className="flex items-center gap-4">
-          <AuthModal open={open} onClose={() => setOpen(false)} />
+          <AuthModal open={openAuthModal} onClose={() => setOpenAuthModal(false)} />
 
-          <ProfileButton onClickSingIn={() => setOpen(true)} />
+          <ProfileButton onClickSingIn={() => setOpenAuthModal(true)} />
 
           {hasCart && <CartButton />}
         </div>

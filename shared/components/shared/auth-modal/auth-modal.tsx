@@ -17,7 +17,7 @@ export const AuthModal: React.FC<Props> = ({ open, onClose }) => {
 
   return (
     <Dialog open={open} onOpenChange={handleClosed}>
-      <DialogContent className="p-0 w-[450px] bg-white">
+      <DialogContent className="w-[450px] bg-white">
         FORM
         <hr />
         <div className="flex gap-2">
