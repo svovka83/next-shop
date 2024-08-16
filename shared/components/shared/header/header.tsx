@@ -3,10 +3,15 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { CartButton, Container, ProfileButton, SearchInput } from "..";
+import {
+  AuthModal,
+  CartButton,
+  Container,
+  ProfileButton,
+  SearchInput,
+} from "..";
 import { useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
-import { useSession } from "next-auth/react";
 
 interface Props {
   hasSearch?: boolean;
@@ -19,7 +24,8 @@ export const Header: React.FC<Props> = ({
   hasCart = true,
   className,
 }) => {
-  const { data: session } = useSession();
+  const [open, setOpen] = React.useState(false);
+
   const searchParams = useSearchParams();
 
   React.useEffect(() => {
@@ -63,7 +69,10 @@ export const Header: React.FC<Props> = ({
 
         {/* Right size */}
         <div className="flex items-center gap-4">
-          <ProfileButton />
+          <AuthModal open={open} onClose={() => setOpen(false)} />
+
+          <ProfileButton onClickSingIn={() => setOpen(true)} />
+
           {hasCart && <CartButton />}
         </div>
       </Container>
