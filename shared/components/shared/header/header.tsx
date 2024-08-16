@@ -3,11 +3,10 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { CartButton, Container, SearchInput } from "..";
-import { Button } from "../../ui";
-import { User } from "lucide-react";
+import { CartButton, Container, ProfileButton, SearchInput } from "..";
 import { useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
+import { useSession } from "next-auth/react";
 
 interface Props {
   hasSearch?: boolean;
@@ -20,6 +19,7 @@ export const Header: React.FC<Props> = ({
   hasCart = true,
   className,
 }) => {
+  const { data: session } = useSession();
   const searchParams = useSearchParams();
 
   React.useEffect(() => {
@@ -63,9 +63,7 @@ export const Header: React.FC<Props> = ({
 
         {/* Right size */}
         <div className="flex items-center gap-4">
-          <Button variant="outline" className="flex items-center gap-1">
-            <User size="16px" /> Enter
-          </Button>
+          <ProfileButton />
           {hasCart && <CartButton />}
         </div>
       </Container>
