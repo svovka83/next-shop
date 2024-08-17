@@ -40,3 +40,5 @@ export { ProfileButton } from "./header/profile-button";
 export { AuthModal } from "./auth-modal/auth-modal";
 export { LoginForm } from "./auth-modal/login-form";
 export { RegisterForm } from "./auth-modal/register-form";
+export { InfoBlock } from "./utils/info-block";
+export { ProfileForm } from "./profile/profile-form";

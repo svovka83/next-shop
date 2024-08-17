@@ -89,7 +89,8 @@ export async function createOrder(data: CheckoutFormValues) {
     {
       /* відправляємо інформацію з даними на payment service */
     }
-    const paymentData = await createPayment({ // доробити інтерфейс PaymentData під даними замовлення !!!!!
+    const paymentData = await createPayment({
+      // доробити інтерфейс PaymentData під даними замовлення !!!!!
       orderId: order.id,
       amount: order.totalAmount,
       description: "Order #" + order.id,
@@ -105,7 +106,7 @@ export async function createOrder(data: CheckoutFormValues) {
       },
       data: {
         paymentId: paymentData.id,
-        status: paymentData.status, 
+        status: paymentData.status,
       },
     });
 
@@ -130,3 +131,5 @@ export async function createOrder(data: CheckoutFormValues) {
     console.log("[createOrder] Server error:", error);
   }
 }
+
+export async function updateUserInfo(data: any) {}

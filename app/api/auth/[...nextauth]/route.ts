@@ -1,11 +1,11 @@
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "@/prisma/prisma-client";
 import { compare, hashSync } from "bcrypt";
 import { UserRole } from "@prisma/client";
 
-export const authOptions = {
+export const authOptions: AuthOptions = {
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_ID || "",
@@ -69,7 +69,7 @@ export const authOptions = {
   session: {
     strategy: "jwt",
   },
-  callback: {
+  callbacks: {
     async signIn({ user, account }) {
       // signIn повертає true або false
       try {
@@ -109,7 +109,7 @@ export const authOptions = {
 
         await prisma.user.create({
           data: {
-            fullName: user.name,
+            fullName: user.name ||  "User " + user.id,
             email: user.email,
             password: hashSync(user.id.toString(), 10),
             verified: new Date(),
@@ -126,6 +126,10 @@ export const authOptions = {
     },
 
     async jwt({ token }) {
+      if (!token.email) {
+        return token;
+      }
+
       const findUser = await prisma.user.findFirst({
         where: {
           email: token.email,
@@ -133,7 +137,7 @@ export const authOptions = {
       });
 
       if (findUser) {
-        token.id = findUser.id;
+        token.id = String(findUser.id);
         token.fullName = findUser.fullName;
         token.email = findUser.email;
         token.role = findUser.role;
