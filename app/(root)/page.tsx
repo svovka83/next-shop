@@ -4,6 +4,7 @@ import {
   TopBar,
   Filters,
   ProductsGroupList,
+  Stories,
 } from "@/shared/components/shared";
 import { Suspense } from "react";
 import { findPizzas } from "@/shared/functions";
@@ -25,6 +26,9 @@ export default async function Home({
           className="font-extrabold pl-10"
         />
       </Container>
+
+      {/* <Stories /> */}
+
       <TopBar
         categories={catagories.filter(
           (category) => category.products.length > 0

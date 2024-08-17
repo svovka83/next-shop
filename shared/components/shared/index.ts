@@ -43,3 +43,4 @@ export { RegisterForm } from "./auth-modal/register-form";
 export { InfoBlock } from "./utils/info-block";
 export { ProfileForm } from "./profile/profile-form";
 export { VerificationUser } from "./email-templates/verification-user";
+export { Stories } from "./stories";
