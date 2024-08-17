@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { Header } from "@/shared/components/shared";
 
@@ -15,7 +16,9 @@ export default function HomeLayout({
 }>) {
   return (
     <main className="min-h-screen">
-      <Header />
+      <Suspense>
+        <Header />
+      </Suspense>
       {modal}
       {children}
     </main>

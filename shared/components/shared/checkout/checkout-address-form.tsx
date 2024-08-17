@@ -1,7 +1,5 @@
 import React from "react";
-import { ErrorText, FormInput, FormTextarea, WhiteBlock } from "..";
-import { AddressInput } from "../form/address-input";
-import { Controller, useFormContext } from "react-hook-form";
+import { FormInput, FormTextarea, WhiteBlock } from "..";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -13,8 +11,6 @@ export const CheckoutAddressForm: React.FC<Props> = ({
   loading,
   className,
 }) => {
-  const { control } = useFormContext();
-
   return (
     <WhiteBlock
       title="3. Delivery address"
@@ -26,17 +22,6 @@ export const CheckoutAddressForm: React.FC<Props> = ({
           className="text-base"
           placeholder="...input address delivery"
         />
-
-        {/* <Controller
-          control={control}
-          name="address"
-          render={({ field, fieldState: { error } }) => (
-            <>
-              <AddressInput onChangeValue={field.onChange} />
-              {error?.message && <ErrorText text={error.message} />}
-            </>
-          )}
-        /> */}
 
         <FormTextarea
           name="comment"
