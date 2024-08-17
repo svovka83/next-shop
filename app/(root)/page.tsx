@@ -27,7 +27,7 @@ export default async function Home({
         />
       </Container>
 
-      {/* <Stories /> */}
+      <Stories />
 
       <TopBar
         categories={catagories.filter(
