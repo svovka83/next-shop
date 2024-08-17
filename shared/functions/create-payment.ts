@@ -15,7 +15,7 @@ export async function createPayment(details: Props) {
   const _id = String(details.amount + details.orderId);
   return {
     id: _id,
-    url: "http://localhost:3000/?paid",
+    url: "http://localhost:3000/payment/service",
     status: OrderStatus.SUCCEEDED,
   };
 }

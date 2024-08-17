@@ -29,8 +29,8 @@ export const ProfileForm: React.FC<Props> = ({ data }) => {
   const onSubmit = async (data: TFormRegister) => {
     try {
       await updateUserInfo({
-        email: data.email,
         fullName: data.fullName,
+        email: data.email,
         password: data.password,
       });
 
@@ -80,19 +80,19 @@ export const ProfileForm: React.FC<Props> = ({ data }) => {
           />
 
           <Button
-            disabled={form.formState.isSubmitting}
-            className="text-base mt-10"
             type="submit"
+            className="text-base mt-10"
+            disabled={form.formState.isSubmitting}
           >
             Save
           </Button>
 
           <Button
-            onClick={onClickSignOut}
-            variant="secondary"
-            disabled={form.formState.isSubmitting}
-            className="text-base"
             type="button"
+            className="text-base"
+            variant="secondary"
+            onClick={onClickSignOut}
+            disabled={form.formState.isSubmitting}
           >
             Exit
           </Button>

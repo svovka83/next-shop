@@ -5,7 +5,6 @@ import { TFormLogin, formLoginSchema } from "./schemas";
 import { FormInput, Title } from "..";
 import { Button } from "../../ui";
 import toast from "react-hot-toast";
-import { prisma } from "@/prisma/prisma-client";
 import { signIn } from "next-auth/react";
 
 interface Props {
@@ -61,9 +60,9 @@ export const LoginForm: React.FC<Props> = ({ onClose }) => {
         <FormInput name="password" label="Password" required />
 
         <Button
-          loading={form.formState.isSubmitting}
-          className="h-12 text-base"
           type="submit"
+          className="h-12 text-base"
+          loading={form.formState.isSubmitting}
         >
           Enter
         </Button>

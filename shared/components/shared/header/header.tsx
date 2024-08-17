@@ -37,6 +37,12 @@ export const Header: React.FC<Props> = ({
         }
       );
     }
+
+    if (searchParams.has("verified")) {
+      toast.success("Code from the email has been successfully verified!", {
+        duration: 5000,
+      });
+    }
   }, []); // прибрати з посилання "http://localhost:3000/?paid" - /?paid після відпрацювання toast.success
 
   return (
@@ -69,7 +75,10 @@ export const Header: React.FC<Props> = ({
 
         {/* Right size */}
         <div className="flex items-center gap-4">
-          <AuthModal open={openAuthModal} onClose={() => setOpenAuthModal(false)} />
+          <AuthModal
+            open={openAuthModal}
+            onClose={() => setOpenAuthModal(false)}
+          />
 
           <ProfileButton onClickSingIn={() => setOpenAuthModal(true)} />
 

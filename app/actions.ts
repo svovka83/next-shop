@@ -3,10 +3,12 @@
 "use server";
 
 import { prisma } from "@/prisma/prisma-client";
-import { PayOrder } from "@/shared/components/shared";
+import { OrderStatus, Prisma } from "@prisma/client";
+import { PayOrder, VerificationUser } from "@/shared/components/shared";
 import { CheckoutFormValues } from "@/shared/components/shared/form/checkout-form-schemas";
 import { createPayment, sendEmail } from "@/shared/functions";
-import { OrderStatus } from "@prisma/client";
+import { getUserSession } from "@/shared/functions/get-user-session";
+import { hashSync } from "bcrypt";
 import { cookies } from "next/headers";
 
 export async function createOrder(data: CheckoutFormValues) {
@@ -132,4 +134,73 @@ export async function createOrder(data: CheckoutFormValues) {
   }
 }
 
-export async function updateUserInfo(data: any) {}
+export async function updateUserInfo(body: Prisma.UserUpdateInput) {
+  try {
+    const currentUser = await getUserSession();
+
+    if (!currentUser) {
+      throw new Error("User not found");
+    }
+
+    await prisma.user.update({
+      where: {
+        id: Number(currentUser.id),
+      },
+      data: {
+        fullName: body.fullName,
+        email: body.email,
+        password: hashSync(body.password as string, 10),
+      },
+    });
+  } catch (error) {
+    console.log("Error [UPDATE_USER]", error);
+    throw error;
+  }
+}
+
+export async function registerUser(body: Prisma.UserCreateInput) {
+  try {
+    const user = await prisma.user.findFirst({
+      where: {
+        email: body.email,
+      },
+    });
+
+    if (user) {
+      if (!user.verified) {
+        throw new Error("Mail is not confirmed");
+      }
+
+      throw new Error("User already exists");
+    }
+
+    const createUser = await prisma.user.create({
+      data: {
+        fullName: body.fullName,
+        email: body.email,
+        password: hashSync(body.password, 10),
+      },
+    });
+
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
+
+    await prisma.verificationCode.create({
+      data: {
+        code,
+        userId: createUser.id,
+      },
+    })
+
+    await sendEmail(
+      createUser.email,
+      "Greeting, confirm your registration account",
+      VerificationUser({
+        code
+      })
+    );
+
+  } catch (error) {
+    console.log("Error [CREATE_USER]", error);
+    throw error;
+  }
+}

@@ -3,5 +3,6 @@ export enum ApiRoutes {
   INGREDIENTS = "/ingredients",
   GET_CART = "/cart",
   POST_CART = "/cart",
+  AUTH_ME = "/auth/me",
   // PATCH_CART = `/cart/${id}`,
 }

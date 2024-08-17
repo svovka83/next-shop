@@ -18,6 +18,8 @@ import {
 import { useCart } from "@/shared/hooks";
 import { createOrder } from "@/app/actions";
 import toast from "react-hot-toast";
+import { useSession } from "next-auth/react";
+import { Api } from "@/shared/services/api-client";
 
 export default function Checkout() {
   const [submitting, setSubmitting] = React.useState(false);
@@ -29,6 +31,8 @@ export default function Checkout() {
     totalAmount,
     loading,
   } = useCart();
+
+  const { data: session } = useSession();
 
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutFormSchema),
@@ -42,9 +46,24 @@ export default function Checkout() {
     },
   });
 
+  React.useEffect(() => {
+    async function fetchUserInfo() {
+      const userInfo = await Api.auth.getMe();
+      const [firstName, lastName] = userInfo.fullName.split(" ");
+
+      form.setValue("firstName", firstName);
+      form.setValue("lastName", lastName);
+      form.setValue("email", userInfo.email);
+    }
+
+    if (!session) {
+      fetchUserInfo();
+    }
+  }, []);
+
   const onSubmit = async (data: CheckoutFormValues) => {
     try {
-      if (!window.confirm(`Please confirm payment ${totalAmount}`)) return;
+      if (!window.confirm("Are you sure go to payment")) return;
       setSubmitting(true);
 
       const url = await createOrder(data);
