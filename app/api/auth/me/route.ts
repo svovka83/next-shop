@@ -8,7 +8,7 @@ export async function GET() {
 
     if (!user) {
       return NextResponse.json(
-        { message: "[USER_GET] You are not authorized" },
+        { message: "[USER_GET] You are not authorized!" },
         { status: 401 }
       );
     }
