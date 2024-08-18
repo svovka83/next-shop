@@ -1,10 +1,13 @@
 import { prisma } from "@/prisma/prisma-client";
-import { getUserSession } from "@/shared/functions/get-user-session";
+import { getServerSession } from "next-auth/next";
 import { NextResponse } from "next/server";
+import { authOptions } from "../[...nextauth]/route";
+
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
-    const user = await getUserSession();
+    const user = await getServerSession(authOptions);
 
     if (!user) {
       return NextResponse.json(
@@ -15,7 +18,7 @@ export async function GET() {
 
     const data = await prisma.user.findUnique({
       where: {
-        id: Number(user.id),
+        id: Number(user.user.id),
       },
       select: {
         fullName: true,
