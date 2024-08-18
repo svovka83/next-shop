@@ -7,9 +7,10 @@ import { OrderStatus, Prisma } from "@prisma/client";
 import { PayOrder, VerificationUser } from "@/shared/components/shared";
 import { CheckoutFormValues } from "@/shared/components/shared/form/checkout-form-schemas";
 import { createPayment, sendEmail } from "@/shared/functions";
-import { getUserSession } from "@/shared/functions/get-user-session";
 import { hashSync } from "bcrypt";
 import { cookies } from "next/headers";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 
 export async function createOrder(data: CheckoutFormValues) {
   try {
@@ -136,7 +137,7 @@ export async function createOrder(data: CheckoutFormValues) {
 
 export async function updateUserInfo(body: Prisma.UserUpdateInput) {
   try {
-    const currentUser = await getUserSession();
+    const currentUser = await getServerSession(authOptions);
 
     if (!currentUser) {
       throw new Error("User not found");
@@ -144,7 +145,7 @@ export async function updateUserInfo(body: Prisma.UserUpdateInput) {
 
     await prisma.user.update({
       where: {
-        id: Number(currentUser.id),
+        id: Number(currentUser.user.id),
       },
       data: {
         fullName: body.fullName,
