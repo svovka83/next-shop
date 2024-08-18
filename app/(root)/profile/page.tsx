@@ -1,17 +1,18 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { prisma } from "@/prisma/prisma-client";
 import { ProfileForm } from "@/shared/components/shared";
-import { getUserSession } from "@/shared/functions/get-user-session";
+import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
 
 export default async function ProfilePage() {
-  const session = await getUserSession();
+  const session = await getServerSession(authOptions);
 
   if (!session) {
     return redirect("/not-auth");
   }
 
   const user = await prisma.user.findFirst({
-    where: { id: Number(session.id) },
+    where: { id: Number(session.user.id) },
   });
 
   if (!user) {
