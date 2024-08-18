@@ -9,7 +9,6 @@ export const metadata: Metadata = {
 export default function CheckoutLayout({
   children,
 }: Readonly<{
-  modal: React.ReactNode;
   children: React.ReactNode;
 }>) {
   return (
