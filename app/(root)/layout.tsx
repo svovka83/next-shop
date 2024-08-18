@@ -11,16 +11,16 @@ export default function HomeLayout({
   modal,
   children,
 }: Readonly<{
-  modal: React.ReactNode;
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <main className="min-h-screen">
       <Suspense>
         <Header />
       </Suspense>
-      {modal}
       {children}
+      {modal}
     </main>
   );
 }
